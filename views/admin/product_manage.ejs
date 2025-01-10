@@ -1,0 +1,201 @@
+
+<html lang="en"> 
+<head>
+</head> 
+
+<body class="app">   	
+<%-include('partials/header')%>
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Product Management</h1>
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+
+							    <div class="col-auto">						    
+								    <a class="btn app-btn-secondary" href="/admin/add_product">
+									    Add Products
+									</a>
+							    </div>
+						    </div><!--//row-->
+					    </div><!--//table-utilities-->
+				    </div><!--//col-auto-->
+			    </div><!--//row-->
+			   
+			    
+			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Products</a>
+				    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Deleted Products</a> 
+				</nav>
+				
+				
+				<div class="tab-content" id="orders-table-tab-content">
+			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					    <div class="app-card app-card-orders-table shadow-sm mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Product id</th>
+												<th class="cell">Product name</th>
+												<th class="cell">Brand</th>
+												<!-- <th class="cell">Size</th>
+												<th class="cell">Color</th> -->
+												<th class="cell">Category</th>	 
+												<th class="cell">Quantity</th>
+												<!-- <th class="cell">Material</th> -->
+												<th class="cell">Real&nbsp;Price</th>
+                                                <th class="cell">Offer&nbsp;Price</th>
+												<th></th>
+
+											</tr>
+										</thead>
+										<tbody>
+											
+										<%	products.forEach((x)=> {
+											if(x.is_deleted == false ){  %>
+												<tr id="dynamic_tr">
+													<td class="cell"><%= String(x._id).substring(0,8) %></td>
+													<td class="cell"><span><%= x.product_name %></span></td>
+													<td class="cell"><%= x.brand %></td>
+													<td class="cell">
+														<% x.category.forEach((item)=> {%>
+															<span><%= item.category_name %>,</span>
+														<% }); %>
+													</td>
+													<td class="cell"><span><%= x.quantity %></span></td>
+													<td class="cell">₹<%= x.price %> </td>
+													<td class="cell">₹<%= x.offer_price %></td>
+
+                                                    <td style="padding:8px 0;"><a href="/admin/edit_product?id=<%= x._id %>" id="delete_btn" class="btn btn-primary btn-sm mr-4" style="color: #ffffff; background-color: #111">Edit</a></td>
+													<td class=" "><a href="/admin/product_manage" id="delete_btn" class="btn btn-danger btn-sm"  onclick="delete_product('<%= x._id %>',false)" style="color: #ffffff; background-color: #e23333 ;">delete</a></td>
+
+												</tr>
+											<% }}) %>
+											
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						       
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+						<!-- <nav class="app-pagination">
+							<ul class="pagination justify-content-center">
+								<li class="page-item disabled">
+									<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+							    </li>
+								<li class="page-item active"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item">
+								    <a class="page-link" href="#">Next</a>
+								</li>
+							</ul>
+						</nav>//app-pagination -->
+	
+			        </div><!--//tab-pane full data-->
+
+			        <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+					    <div class="app-card app-card-orders-table mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+								    
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Product id</th>
+												<th class="cell">Product name</th>
+												<th class="cell">Brand</th>
+												<!-- <th class="cell">Size</th>
+												<th class="cell">Color</th> -->
+												<th class="cell">Category</th>	 
+												<th class="cell">Quantity</th>
+												<!-- <th class="cell">Material</th> -->
+												<th class="cell">Price</th>
+												<th></th>
+
+											</tr>
+										</thead>
+										<tbody>
+
+											<%	products.forEach((x)=> {
+												if(x.is_deleted == true ){  %>
+												<tr id="dynamic_tr">
+													<td class="cell"><%= String(x._id).substring(0,8) %></td>
+													<td class="cell"><span class=""><%= x.product_name %></span></td>
+													<td class="cell"><%= x.brand %></td>
+													<td class="cell">
+														<% x.category.forEach((item)=> {%>
+															<span><%= item.category_name %>,</span>
+														<% }); %>
+													</td>
+													<td class="cell"><span><%= x.quantity %></span></td>
+													<td class="cell"><%= x.price %> <span>/-</span></td>    
+                                                    <td style="padding:8px 0;"><a href="/admin/edit_product?id=<%= x._id %>" id="delete_btn" class="btn btn-primary btn-sm mr-4" style="color: #ffffff;">Edit</a></td>
+													<td class=" "><a href="/admin/product_manage" id="delete_btn" class="btn btn-danger btn-sm"  onclick="delete_product('<%= x._id %>',true)" style="color: #ffffff; background-color: #137df5 ;">Restore</a></td>
+
+												</tr>
+											<% }}); %>
+											
+										</tbody>
+                                    </table>
+						        </div><!--//table-responsive-->
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+			        </div><!--//tab-pane-->
+			        
+                     <!-- //tab-pane deleted data -->
+			        
+				</div><!--//tab-content-->
+				
+
+				<!-- app-pagination -->
+                <% let current_page = 1 , total_pages = 1  %>
+				<div class="pagination">
+					<% if (current_page > 1) { %>
+						<a href="/admin/orders?page=<%= current_page - 1 %> & limit=10">Previous</a>
+
+					<% } %>
+					<% for (let i = 1; i <= total_pages; i++) { %>
+						<a href="/admin/orders?page=<%= i %> & limit=10" 
+						   class="<%= current_page === i ? 'active' : '' %>"><%= i %></a>
+					<% } %>
+					<% if (current_page < total_pages) { %>
+						<a href="/admin/orders?page=<%= current_page + 1 %> & limit=10">Next</a>
+					<% } %>
+				</div>
+
+				<!-- app-pagination -->
+
+				
+
+
+
+			    
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+	    
+    </div><!--//app-wrapper-->    					
+	<script src="admin/js/product_manage.js"></script> 
+ 
+    <!-- Javascript -->          
+    <script src="admin/plugins/popper.min.js"></script>
+    <script src="admin/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script src="admin/js/app.js"></script> 
+     <script>
+
+     </script>
+
+</body>
+</html> 
+

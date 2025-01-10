@@ -1,0 +1,115 @@
+<%-include('partials/header')%>
+<link rel="stylesheet" href="user/css/cart.css">
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shopping Cart</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/home">Home</a>
+                            <a href="/shop">Shop</a>
+                            <span>Shopping Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="shopping__cart__table">
+                        <table> 
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <%  
+                                products === ''? products = [] :products
+                                let sub_total = 0 
+                                products.forEach((x)=>{ 
+                                    sub_total += (x?.qty_in_cart)*(x?.offer_price) 
+                                }) 
+
+                                products.forEach((x)=>{ %>
+
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <img width="90px" height="90px" src="assets/uploads/<%=x?.images[0]%>" alt="">
+                                            </div>
+                                            <div class="product__cart__item__text">
+                                                <h6><%=x.product_name%></h6>
+                                                <h5>₹<%=x.offer_price%></h5>
+                                            </div>
+                                        </td>
+
+                                        <td class="quantity__item">
+                                            <div class="quantity1 ">
+                                                <div class="qty-btn" onclick="change_quantity('<%= x._id %>', -1)">-</div>
+                                                <input type="text" class="product_qty" value="<%= x.qty_in_cart %>" onchange="update_cart(event)" data-product-id="<%= x._id %>" readonly>
+                                                <div class="qty-btn" onclick="change_quantity('<%= x._id %>', 1)">+</div>
+                                            </div>
+                                        </td>
+
+                                        <td class="cart__price">
+                                            <%= (x?.qty_in_cart)*(x?.offer_price) %>/-
+                                        </td>
+                                        <td class="cart__close"><i class="fa fa-close" onclick="delete_cart_product('<%=x?._id%>' )" style="cursor: pointer;"></i></td>
+                                    </tr>
+                                <% }) %>
+                                <% if(products.length <= 0 ){ %>
+                                    <tr>
+                                        <td>
+                                            <h1 style="margin: 30px; color: lightgrey; text-align: center;">Cart is Emplty</h1>
+                                        </td>
+                                    </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn">
+                                <a href="/shop">Continue Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+
+                    <%  let total_Amount = 0  %>
+                    <div class="cart__total">
+                        <h6>Cart total</h6>
+                        <ul>
+                            <li>Subtotal <span id="subtotal">₹ <%= sub_total %></span></li>
+
+                            <li>Total <span id="total_Amount">₹ <%= sub_total - total_Amount %></span></li>
+                        </ul>
+                        <div class="primary-btn" onclick="checkout_btn('<%= products %>')">Proceed to checkout</div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+    <!-- Footer Section Begin -->
+    <%-include('partials/footer')%>
+    <!-- Footer Section End -->
+
+<script src="user/js/cart.js" ></script>
+<script src="user/js/add_to_cart.js" ></script>

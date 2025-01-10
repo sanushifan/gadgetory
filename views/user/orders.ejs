@@ -1,0 +1,97 @@
+<%-include('partials/header')%>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order History</title>
+    <link rel="stylesheet" href="user/css/orders.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+</head>
+<body>
+<div class="orders-container">
+
+
+    <h2><b>Order History</b> </h2>
+
+    <ul>
+  
+        <% orders.forEach((order)=>{ %>
+            <li class="order-item">
+                <div class="order-header">
+                    <span>#<%= order.order_id %></span>
+                    <div>
+                      <span class="status payment_methord">methord : <%= order.payment_method %></span>
+                      <span class="status <%= order.payment_status %>">payment Status: <%= order.payment_status %></span>
+                      <span class="status <%= order.status %>">Order : <%= order.status %></span>
+
+                    </div>
+                </div>
+                <div class="order-details">
+                    <% order.order_items.forEach((item)=>{ %>
+                        <div class="order-product">
+                            <span><%= item.product_id.product_name %> ( <%= item.quantity %> )</span>
+                            <span>₹<%= item.product_id.offer_price %> </span>
+                        </div>
+                        <% if(order.status ==='Delivered' ) { %>
+                            <div class="product-card" data-id="<%= item.product_id._id %>">
+                              <div class="rating-container">
+                                <% for (let i = 1; i <= 5; i++) { %>
+                                  <% if (i <= Math.floor(item.product_id.rating)) { %>
+                                    <span class="rating-star filled" data-value="<%= i %>">&#9733;</span>
+                                  <% } else { %>
+                                    <span class="rating-star" data-value="<%= i %>">&#9734;</span>
+                                  <% } %>
+                                <% } %>
+                              </div>
+                            </div>
+                        <%}%>
+                   
+                    <%})%>
+                    
+                    
+                </div>
+                <div class="order-summary">
+                    <span class="order-price">Total Price: ₹<%= order.total_price %></span>
+                    <span class="total-price">Final Price: ₹<%= order.final_price %></span>
+                </div>
+
+
+
+
+
+                <div class="order-buttons">
+
+                    <a href="/order_details?id=<%= order._id %>"><button class="view-details-btn">View Details</button></a>
+                    <% if(order.status ==='Delivered' ) { %>
+                        <button class="download-invoice-btn" onclick="Agenerate_invoice('<%= order._id %>')"><a href="invoice/?order_id=<%= order.order_id %>">Download Invoice</a></button>
+                        <button class="return-btn" onclick="update_order_status('<%= order._id %>','Return')">Return Order</button>
+
+                    <% } else if(['Pending', 'Processing', 'Shipped' ].includes(order.status) ){%>
+
+                        <%  if(order.payment_status !== 'Completed' && order.payment_method == 'Razorpay' ) {%>
+                          <button class="repay-btn" onclick="initiateRazorpayPayment('<%= order.payment_id %>', '<%= order.final_price %>' , 'INR')">Repay</button>
+                        <% } %>
+                        
+                        <button class="cancel-btn" onclick="update_order_status('<%= order._id %>','Cancel')">Cancel Order</button>
+                    <% } %>
+                    
+
+
+                    
+                </div>
+            </li>
+        <%})%>
+    </ul>
+</div>
+</body>
+
+<script src="user/js/orders.js"></script>
+
+</html>
+
+
+<%-include('partials/footer')%>

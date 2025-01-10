@@ -1,0 +1,107 @@
+
+    <%-include('partials/header')%>
+
+
+    <link rel="stylesheet" href="admin/css/add_product_style.css">
+
+</head>
+
+<body class="app">
+
+
+    <div class="app-wrapper">
+
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+            <div class="container-xl">
+
+                <div class="form-container">
+                    <form id="productForm" action="/admin/edit_user/<%=user?._id%>" method="post" >
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" id="first_name" name="first_name" required 
+                                pattern="[A-Za-z]+"
+                                title="First name should only contain letters" > 
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" id="last_name" name="last_name" required 
+                                pattern="[A-Za-z]+"
+                                title="Last name should only contain letters" > 
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phno_number">Phone Number</label>
+                            <input type="number" id="phno_number" name="phno_number" required
+                                pattern="^\d{10}$" 
+                                title="Please enter a 10-digit phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" readonly required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cpassword">Conform Password</label>
+                            <input type="password" id="cpassword" >
+                        </div>
+
+                        <div class="form-group full-width buttons">
+                            <button type="button" class="cancel-button" onclick="location.href='/admin/user_manage'">Cancel</button>
+                            <button type="submit" class="add-button" id="add_button">ADD USER</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div><!--//container-fluid-->
+        </div><!--//app-content-->
+    </div><!--//app-wrapper-->
+
+    <script>
+        // Get references to the DOM elements
+        // const showNotificationBtn = document.getElementById('showNotificationBtn');
+        // const closeBtn = document.getElementById('closeBtn');
+        // const add_product_btn = document.getElementById('add_button')
+        const product_form = document.getElementById('productForm')
+        
+        let fname = document.getElementById("first_name").value='<%=user?.first_name %>'
+        let lame = document.getElementById("last_name").value='<%=user?.last_name %>'
+        let number = document.getElementById("phno_number").value='<%=user?.phno_number %>'
+        let email = document.getElementById("email").value='<%=user?.email %>'
+        let password = document.getElementById("password")
+        let cpassword = document.getElementById("cpassword")
+
+        product_form.addEventListener('submit', function (event) {
+            let isValid = true;
+
+            if (password.value !== cpassword.value) {
+                alert("password is not match")
+                isValid=false
+            }
+            if (isValid) {
+                alert("User added Sucessfully")
+            } else{
+                event.preventDefault()
+            }
+            
+        });
+    </script>
+
+    <!-- Javascript -->
+    <script src="admin/plugins/popper.min.js"></script>
+    <script src="admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Page Specific JS -->
+    <script src="admin/js/app.js"></script>
+    <script src="admin/js/add_product.js"></script>
+
+</body>
+
+</html>

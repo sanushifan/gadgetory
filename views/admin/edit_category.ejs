@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="admin/css/add_product_style.css">
+
+<div class="app-wrapper">
+
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <!-- <h1 class="app-page-title mb-0">Coupon Management</h1> -->
+                </div>
+            </div><!--//col-auto-->
+        </div><!--//row-->
+    </div><!--//app-content-->
+
+    <form id="categoryForm" onsubmit="editedCategoryForm(event,'<%= category._id %>')">
+
+        <div class="form-group full-width mb-2" >
+            <label for="category_name"> Category Name:</label>
+            <input type="text" id="category_name" value="<%=category.category_name%>" required>
+            <small id="category_name_error" class="error-message" style="display:none;">Category name is required</small>
+        </div>
+
+        <div class="form-group full-width mb-2" >
+            <label for="category_offer"> Category Name:</label>
+            <input type="text" id="category_offer" value="<%=category.category_offer%>" required>
+            <small id="category_offer_error" class="error-message" style="display:none;">Category offer is required</small>
+        </div>
+
+        <div class="form-group full-width mb-2">
+            <label for="description">product description</label>
+            <textarea id="description"  rows="3" required><%=category.description%></textarea>
+            <small id="description_error" class="error-message">description is required.</small>
+        </div>
+        
+        <div class="form-group full-width buttons">
+            <button type="button" class="cancel-button" onclick="location.href='/admin/category'">Cancel</button>
+            <button type="submit" class="add-button" id="add_button">ADD Category</button>
+        </div>
+    </form>
+
+    <footer class="app-footer">
+        <div class="container text-center py-3">
+            <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href='#' target="_blank">Sanu Shifan</a> for my Project</small>
+        </div>
+    </footer><!--//app-footer-->
+</div><!--//app-wrapper-->
+
+
+<script src="admin/js/category.js"></script>

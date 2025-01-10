@@ -1,0 +1,110 @@
+<%-include('partials/header')%>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gadgetory | payment Failed</title>
+    <style>
+        /* General Reset */
+
+
+        .content_body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f2ee; /* White background */
+            padding: 30px 0 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #000; /* Text color black for readability */
+        }
+
+        .success-container {
+
+            background: #fff; /* White background for the box */
+            border-radius: 10px;
+            padding: 50px;
+            width: 80%;
+            max-width: 700px; /* Increased width of the box */
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            color: #333;
+        }
+
+        .success-container .icon {
+            font-size: 80px;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        /* p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        } */
+
+        .order-id {
+            font-weight: bold;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Add space between buttons */
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            color: #fff;
+            background-color: #000; /* Black button */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #444;
+        }
+
+        .btn-secondary {
+            background: none;
+            color: #000;
+            border: 2px solid #000;
+        }
+
+        .btn-secondary:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <section class="content_body">
+        <div class="success-container">
+            <div class="icon ">x</div>
+            <h1>Order Failed successfully</h1>
+            <p>Your Order is Failed Please try Again!. Your payment has been processing.</p>
+            <!-- <p>Order ID: <span class="order-id">#12345</span></p> -->
+            <p>You will receive a confirmation email shortly.</p>
+            
+            <div class="btn-container">
+                <a href="/orders" class="btn">View Your Orders</a>
+                <a href="/shop" class="btn btn-secondary">Continue Shopping</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+    </script>
+</body>
+</html>
+<%-include('partials/footer')%>
+
+

@@ -1,0 +1,136 @@
+<%-include('partials/header')%>
+
+        <div class="app-wrapper">
+            
+            <div class="app-content pt-3 p-md-3 p-lg-4">
+                <div class="container-xl">
+                    
+                    <div class="row g-3 mb-4 align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <h1 class="app-page-title mb-0">User Management</h1>
+                        </div>
+				    </div><!--//col-auto-->
+			    </div><!--//row-->
+			   
+			    
+			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Users</a>
+				    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Blocked Users</a>
+				</nav>
+				
+				
+				<div class="tab-content" id="orders-table-tab-content">
+			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					    <div class="app-card app-card-orders-table shadow-sm mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+                                            <tr>
+												<th class="cell">User id</th>
+												<th class="cell">First Name</th>
+												<th class="cell">Last Name</th>
+												<th class="cell">Phno Number</th>	 
+												<th class="cell">Email</th>
+											</tr>
+										</thead>
+										<tbody id="refresh">
+                                            <% user.forEach((x)=> {%>
+												<tr id="dynamic_tr">
+													<td class="cell"><%= x._id %></td>
+													<td class="cell"><span class="truncate"><%= x.first_name %></span></td>
+													<td class="cell"><%= x.last_name %></td>
+													<td class="cell"><span><%= x.phno_number %></span></td>
+													<td class="cell"><span><%= x.email %></span></td>
+													<td style="padding:8px 0;"><a href="/admin/edit_user?id=<%= x._id %>" id="delete_btn" class="btn btn-primary btn-sm mr-4" style="color: #ffffff; background-color: #1d1d1d;">Edit</a></td>
+                                                    <td style="padding:8px 0;"><a href="/admin/user_manage" id="delete_btn" class="btn btn-danger btn-sm mr-4" onclick="block_user('<%= x._id %>')" style="color: #ffffff; background-color: #f54013 ;">Block</a></td>
+													<!-- <td style="padding:8px 0;"><a href="/admin/user_manage" id="delete_btn" class="btn btn-danger btn-sm"  onclick="delete_user('<%= x._id %>')" style="color: #ffffff; background-color: #f54013 ;">delete</a></td> -->
+
+												</tr>
+											<% }); %>
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						       
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+
+					<!-- app-pagination -->
+					
+					<% let current_page = 1 , total_pages = 1  %>
+					<div class="pagination">
+						<% if (current_page > 1) { %>
+							<a href="/admin/user_manage?page=<%= current_page - 1 %> & limit=10">Previous</a>
+
+						<% } %>
+						<% for (let i = 1; i <= total_pages; i++) { %>
+							<a href="/admin/user_manage?page=<%= i %> & limit=10" 
+							class="<%= current_page === i ? 'active' : '' %>"><%= i %></a>
+						<% } %>
+						<% if (current_page < total_pages) { %>
+							<a href="/admin/user_manage?page=<%= current_page + 1 %> & limit=10">Next</a>
+						<% } %>
+					</div>
+
+					<!-- app-pagination -->
+						
+			        </div><!--//tab-pane full data-->
+			        
+			        <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+					    <div class="app-card app-card-orders-table shadow-sm mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">User id</th>
+												<th class="cell">First Name</th>
+												<th class="cell">Last Name</th>
+												<th class="cell">Phno Number</th>	 
+												<th class="cell">Email</th>
+											</tr>
+										</thead>
+                                        <tbody>
+											<% blocked_user.forEach((x)=> {%>
+												<tr id="dynamic_tr">
+													<td class="cell"><%= x._id %></td>
+													<td class="cell"><span class="truncate"><%= x.first_name %></span></td>
+													<td class="cell"><%= x.last_name %></td>
+													<td class="cell"><span><%= x.phno_number %></span></td>
+													<td class="cell"><span><%= x.email %></span></td>
+                                                    <td style="padding:8px 0;"><a href="/admin/edit_user?id=<%= x._id %>" id="delete_btn" class="btn btn-primary btn-sm mr-4" style="color: #ffffff;">Edit</a></td>
+                                                    <td style="padding:8px 0;"><a href="/admin/user_manage" id="delete_btn" class="btn btn-danger btn-sm mr-4" onclick="block_user('<%= x._id %>')" style="color: #ffffff; background-color: #f54013 ;">Unblock</a></td>
+													<!-- <td style="padding:8px 0;"><a href="/admin/user_manage" id="delete_btn" class="btn btn-danger btn-sm"  onclick="delete_user('<%= x._id %>')" style="color: #ffffff; background-color: #f54013 ;">delete</a></td> -->
+
+												</tr>
+											<% }); %>
+
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						       
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+			        </div><!--//tab-pane deleted data-->
+			        
+				</div><!--//tab-content-->
+				
+				
+			    
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+	    
+    </div><!--//app-wrapper-->    					
+	<script src="admin/js/user_manage.js"></script> 
+ 
+    <!-- Javascript -->          
+    <script src="admin/plugins/popper.min.js"></script>
+    <script src="admin/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script src="admin/js/app.js"></script> 
+
+</body>
+</html> 
+

@@ -1,0 +1,141 @@
+<%- include('partials/header') %>
+
+    <!--custum App CSS -->
+    <link rel="stylesheet" href="admin/css/add_product_style.css">
+
+    <!-- Include Cropper.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+
+    <!-- Include Cropper.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script>
+        let existingCategories = 
+            
+    </script>
+    
+
+<body onload="populateExistingdata('<%= product.images %>')">
+    <div class="app-wrapper">
+
+
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+            <div class="container-xl">
+
+                <div class="form-container">
+                    
+                    <form id="productForm" onsubmit="editProductForm(event,'<%= product._id %>')">
+                           
+                        <div class="form-group" >
+                            <label for="produt_name">Product Name</label>
+                            <input type="text" id="productName" name="product_name" value="<%= product.product_name %>" required>
+                            <small id="productNameError" class="error-message"> product Name is required.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <input type="text" id="brand" name="brand" value="<%= product.brand %>" required>
+                            <small id="brandError" class="error-message"> Brand Name is required.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">Size</label>
+                            <input type="text" id="size" name="size" value="<%= product.size %>" required>
+                            <small id="sizeError" class="error-message"> size is required.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <input type="text" id="color" name="color" value="<%= product.color %>" required>
+                            <small id="colorError" class="error-message"> color is required.</small>
+
+                        </div>
+
+
+                        <div class="form-group full-width ">                        
+                            <div class="search-container">
+                                <input type="text" id="search-box" class="search-box mt-3" placeholder="Search Categories..." onkeyup="filterCategories()" style="width: 95.5%;">
+                            </div>
+                            <div>
+
+                                <!-- sending old catagory -->
+                                <input type="hidden" id="previous-category" value="<%=product?.category %>">
+
+                                <label for="category-select">Select Categories:</label>
+                                <div class="category-list" id="category-list" data-user-id="<%= %>">
+
+                                    <% category.forEach((x)=>{ %>
+                                        <div class="category-item" data-category="<%= x.category_name %>" data-category-id="<%= x._id %>"><%= x.category_name %></div>
+                                    <% }) %>
+
+                                </div>
+                            </div>
+
+                            <label for="category-select">Selected Categories:</label>
+
+                            <div class="selected-categories" id="selected-categories">
+
+                            </div>
+                            <input type="hidden" id="selectedCategoriesInput" name="category">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" id="quantity" name="quantity" value="<%=product?.quantity %>" required>
+                            <small id="quantityError" class="error-message"> quantity is required.</small>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="material">Material</label>
+                            <input type="text" id="material" name="material" value="<%=product?.material %>" required>
+                            <small id="materialError" class="error-message"> material is required.</small>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" id="price" name="price" value="<%=product?.price %>" required>
+                            <small id="priceError" class="error-message"> price is required.</small>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="offer_price">Offer Price</label>
+                            <input type="number" id="offerPrice" name="offer_price"  value="<%=product?.offer_price %>"  required>
+                            <small id="offerPriceError" class="error-message">offer price is required.</small>
+                        </div>
+
+
+                        <div class="form-group full-width">
+                            <label for="about">product description</label>
+                            <textarea id="description" name="description" rows="4" required><%= product?.description %></textarea>
+                            <small id="descriptionError" class="error-message">about is required.</small>
+                        </div>
+
+                        <div class="form-group image-upload">
+                            <h2>Crop and Upload Images</h2>
+                            <input type="file" id="imageInput" accept="image/*"><br><br>
+                            <div id="imagePreview"></div>
+
+                            <!-- Crop Modal -->
+                            <div id="cropModal">
+                                <img id="cropImage">
+                                <button id="cropButton">Crop</button>
+                                <button id="closeModal">Cancel</button>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group full-width buttons">
+                            <button type="button" class="cancel-button" onclick="location.href='/admin/product_manage'">Cancel</button>
+                            <button type="submit" class="add-button" id="add_button" >Add product</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!--//container-fluid-->
+        </div><!--//app-content-->
+    </div><!--//app-wrapper-->
+
+<script src="admin/js/edit_product.js"></script>
+
+</body>

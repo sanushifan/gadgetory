@@ -1,0 +1,157 @@
+    .error-message {
+        color: red;
+        display: none;
+    }
+
+    .profile_details {
+
+        font-family: Arial, sans-serif;
+        margin: 20px auto 80px auto;
+        width: 80%;
+        /* max-width: 600px; */
+    }
+
+    .profile_container {
+        background-color: #fff;
+        border-radius: 15px;
+        /* border: 1px solid #555 ; */
+        box-shadow: 1px 1px 20px rgba(102, 102, 102, 0.15);
+        padding: 30px;
+        width: 50vw;
+        /* margin-left: 150px; */
+        margin: 0 auto;
+
+    }
+
+    .profile_container .form-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+
+    .profile_container .form-group {
+        flex: 1;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-weight: bold;
+    }
+
+    #personalInfoForm input, 
+    #addressForm input,textarea,
+    #editAddressForm input,textarea {
+        min-width: 100%;
+        padding: 9px;
+        border: 0px solid #ccc;
+        border-radius: 7px;
+        background-color: #f5f5f5;
+    }
+
+    #passwordForm input{
+        min-width: 100%;
+        padding: 9px;
+        border: 0px solid #ccc;
+        border-radius: 7px;
+        background-color: #f5f5f5;
+    }
+
+
+    .profile_container .button-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .profile_container button {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .profile_container .edit-btn {
+        /* padding: 8px 20px; */
+        background-color: #1d1d1d;
+    }
+
+    .profile_container .cancel-btn {
+        background-color: #888;
+    }
+
+    .save-btn {
+        padding: none;
+        background-color: #d32f2f;
+    }
+
+    .cancel-btn:hover {
+        background-color: #777;
+    }
+
+    .edit-btn:hover {
+        background-color: #363232;
+    }
+
+    .save-btn:hover {
+        background-color: #b71c1c;
+    }
+
+    .password-section {
+        display: none;
+        border-top: 1px solid #ccc;
+        padding-top: 25px;
+        margin-top: 20px;
+    }
+
+    .forgotPassword a {
+        display: flex;
+        justify-content: end;
+        color: #156da8;
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        /* text-decoration: none; */
+    }
+
+    .forgotPassword a:hover {
+        color: #59a4e0;
+
+    }
+
+
+
+
+    .access_control {
+        list-style: none;
+
+        /* display: flex;
+        gap: 20px; */
+        text-align: center;
+        margin-bottom: 45px;
+
+    }
+
+    .access_control li {
+
+
+        color: #b7b7b7;
+        font-size: 24px;
+        font-weight: 700;
+        list-style: none;
+        display: inline-block;
+        margin: 0 30px;
+        cursor: pointer;
+    }
+
+    .access_control li.active {
+        color: #111111;
+    }
+
+      

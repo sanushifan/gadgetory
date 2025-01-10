@@ -1,0 +1,135 @@
+<%-include('partials/header')%>
+
+<link rel="stylesheet" href="admin/css/update_order.css">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gadgetory | order Update</title>
+  <style>
+
+
+  </style>
+</head>
+<body>
+<div class="app-wrapper" style="padding-bottom:50px ;">
+    <div class="order-update">
+        
+            <h1>Order Update</h1>
+
+            
+        
+
+        <div class="section">
+            <h2>Order Details</h2>
+            <table class="details-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Payment Method</th>
+                  <th>Status</th>
+                  <th>order Date</th>
+                  <th>Total Price</th>
+                  <th>Discount Price</th>
+                  <th>Final Price</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td><%= order.order_id %></td>
+                    <td><%= order.payment_method %></td>
+                    <td><%= order.status %></td>
+                    <td>
+                        <%= new Date(order.order_date).toLocaleDateString('en-GB', {
+                            day: '2-digit',
+                            month: 'short',
+                            year: 'numeric',
+                          }) %>
+                    </td>
+                    <td>₹<%= order.total_price %></td>
+                    <td>₹<%= order.discount_price %></td>
+                    <td>₹<%= order.final_price %></td>
+
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+        <h2>Product Details</h2>
+        <table class="details-table">
+            <thead>
+            <tr>
+                <th >Product Name</th>
+                <!-- <th>Payment</th> -->
+                <th>Color</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total&nbsp;Price</th>
+                <!-- <th>Price</th> -->
+
+            </tr>
+            </thead>
+            <tbody>
+
+                <% order.order_items.forEach((x)=> { %>
+                <tr>
+                        <td><%= x.product_id.product_name %></td>
+                        <!-- <td>payment</td> -->
+                        <td><%= x.product_id.color %></td>
+                        <td><%= x.product_id.size %></td>
+                        <td style="text-align: center;"><%= x.quantity %></td>
+                        <td>₹<%= x.product_id.offer_price %></td>
+                        <td>₹<%= x.product_id.offer_price * x.quantity %></td>
+                        <!-- <td>₹<%= x.product_id.price %></td> -->
+
+                </tr>
+                <% }) %>
+                
+            </tbody>
+        </table>
+        </div>
+
+        <div class="section">
+        <h2>User Details</h2>
+        <table class="details-table">
+            <thead>
+            <tr>
+
+                <th>Full Name</th>
+                <th>Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><%= order.address.full_name %></td>
+                <td>
+                    <%= order.address.house %>,
+                    <%= order.address.city %>,
+                    <%= order.address.pincode %>,
+                    <%= order.address.state %>,
+
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+        </div>
+        <div class="status-dropdown">
+            <a href="/orders"><button class="confirm-button">Back To Orders</button></a>
+        </div>
+  </div>
+</div>
+
+  
+
+<script>
+  document.getElementById("status").value = "<%= order.status %>";
+</script>
+<script src="admin/js/update_order.js"></script>
+</body>

@@ -1,0 +1,82 @@
+<%-include('partials/header')%>
+<script src="user/js/wishlist.js"></script>
+
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="filter__controls" style="margin-top: 20px;">
+                    <li class="active" data-filter="*">Your Wishlist</li>
+                    <!-- <li data-filter=".hot-sales">Hot Sales</li> -->
+                </ul>
+            </div>
+        </div>
+
+<style>
+    .remove-btn {
+    background-color: #e53637;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+</style>
+
+        
+        <div class="row">
+            <% if(products?.length<=0){ %>
+                <div style="text-align: center; margin: auto;">
+                    <h1 style=" color: lightgrey;">not found any think</h1>
+                </div>
+            <% }else{ %>   
+                
+                
+
+              <% products.forEach((x) => { %>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+        <div class="product__item">
+            <div class="product__item__pic set-bg" onclick="location.href='/product_details?id=<%=x.product_id._id%>'" data-setbg="assets/uploads/<%=x.product_id.images[0]%>">
+                <!-- <span class="label">New</span> -->
+                <ul class="product__hover">
+                    <li><div onclick="add_to_wishlist(event,'<%=x.product_id._id%>')"><img src="user/img/icon/heart.png" alt=""></div></li>
+                </ul>
+            </div>
+            <div class="product__item__text">
+                <h6><%=x.product_id.product_name%></h6>
+                <a href="#"  class="add-cart" onclick="add_to_cart(event,'<%=x.product_id._id%>',qty=1)" data-id="<%=x.product_id._id%>">+ Add To Cart</a>
+                <div class="rating">
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <div class="d-flex justify-content-between ">
+                    <div class="d-flex pt-2">
+                        <h5>₹<%=x.product_id.offer_price%></h5>
+                        <h6 style="padding-left: 5px; color: #eb2525;"><del> ₹<%=x.product_id.price%>/</del></h6>
+
+                    </div>
+                    <button class="remove-btn" onclick="remove_product('<%= x.product_id._id %>')">Remove</button>
+
+                </div>
+                <!-- Remove Button -->
+            </div>
+        </div>
+    </div>
+<% }) %>
+            <% } %>
+        </div>
+    </div>
+</section> 
+
+
+<%-include('partials/footer')%>
+<script src="user/js/add_to_wishlist.js"></script>

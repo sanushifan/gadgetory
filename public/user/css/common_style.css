@@ -1,0 +1,27 @@
+.rating-container {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .rating-star {
+    font-size: 22px;
+    color: #ccc; /* Default color for empty stars */
+    transition: color 0.2s ease;
+  }
+
+  .rating-star.filled {
+    color: #f39c12; /* Filled star color */
+  }
+
+  .rating-star.hover {
+    color: #ffa500; /* Highlight stars on hover */
+  }
+  .count-badge{
+    display: none ;
+    position: absolute;
+    background-color: #e53637;
+    color: #fff;
+    top: -10;
+    left: 12;
+
+  }

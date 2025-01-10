@@ -1,0 +1,237 @@
+<%-include('partials/header')%>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<link rel="stylesheet" href="user/css/checkout.css">
+
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Check Out</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/home">Home</a>
+                            <a href="/shop">Shop</a>
+                            <span>Check Out</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <!-- <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <div class="coupon-link" onclick="show_coupon()">Click here</div> to enter your code</h6> -->
+                <h6 class="checkout__title">Add Copuon</h6>
+                
+                <form onsubmit="couponForm(event)" class=" mb-4">
+                    <div class="coupon_form">
+                        <input id="coupon_code" type="text" placeholder="Coupon code" required>
+                        <button class="coupon_btn" type="submit">Use&nbsp;Coupon</button>
+                    </div>
+                </form>
+
+                <form onsubmit="form_submit(event)">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                                                        
+                            <h6 class="checkout__title">Address Details</h6>
+                            <% addresses.forEach((x) => { %>
+                                <div class="address_container">
+                                    <div>
+                                        <p><%= x.full_name %> ,<%= x.phone_number %> , <%= x.pincode %> , <%= x.state %> , <%= x.city %> , <%= x.house %> , <%= x.road_map %> </p>
+                                    </div>
+                                    <div class="apply_btn" onclick="apply_address('<%= JSON.stringify(x) %>')">
+                                        <span>Apply</span>
+                                    </div>
+                                </div>
+                                
+                            <% }) %>
+
+                            <div class="checkout__input">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" placeholder="Enter your full name" required>
+                                <small id="fullNameError" class="error-message">Full name is required.</small>
+                                
+                            </div>
+                            <div class="checkout__input">
+                                <label for="phone">Phone Number</label>
+                                <input type="number" id="phone_number" placeholder="Enter phone number" required>
+                                <small id="phoneError" class="error-message">10 number is required.</small>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    
+                                    <div class="checkout__input">
+                                        <label for="pincode">Pincode</label>
+                                        <input type="number" id="pincode" placeholder="Enter pincode" required>
+                                        <small id="pincodeError" class="error-message">Pincode 6 number is required.</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="state">State</label>
+
+                                    <div class="checkout__input">
+                                        <select  id="state" required style="padding:20px 20px; float: none; ">
+                                            <!-- <option value="" disabled selected>Select State</option> -->
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <!-- Add more states as needed -->
+                                        </select>
+                                        <small id="stateError" class="error-message">State is required.</small>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="checkout__input">
+                                <label for="city">City</label>
+                                <input type="text" id="city" placeholder="Enter city" required>
+                                <small id="cityError" class="error-message">City is required.</small>
+                            </div>
+
+                            <div class="checkout__input">
+                                <label for="house">House No</label>
+                                <textarea id="house" rows="3" placeholder="Enter house number or name" required></textarea>
+                                <small id="houseError" class="error-message">House number is required.</small>
+                            </div>
+
+                            <div class="checkout__input">
+                                <label for="roadMap">Road Map</label>
+                                <textarea id="roadMap" rows="3" placeholder="Enter road map or description" required></textarea>
+                                <small id="roadMapError" class="error-message">Road map is required.</small>
+                            </div>
+      
+                            <!-- <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Phone<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="checkout__input__checkbox">
+                                <label for="acc">
+                                    Create an account?
+                                    <input type="checkbox" id="acc">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <p>Create an account by entering the information below. If you are a returning customer
+                                please login at the top of the page</p>
+                            </div> -->
+                            <!-- <div class="checkout__input">
+                                <p>Account Password<span>*</span></p>
+                                <input type="text">
+                            </div>
+                            <div class="checkout__input__checkbox">
+                                <label for="diff-acc">
+                                    Note about your order, e.g, special noe for delivery
+                                    <input type="checkbox" id="diff-acc">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Order notes<span>*</span></p>
+                                <input type="text"
+                                placeholder="Notes about your order, e.g. special notes for delivery.">
+                            </div> -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4 class="order__title">Your order</h4>
+                                <div class="checkout__order__products">Product <span>Total</span></div>
+                                <ul class="checkout__total__products">
+                                    <% products === ''? products = [] :products %>
+                                    <% let sum= 0 %>
+                                    <% products.forEach((x)=>{ %>
+                                        <li> <%= x.product_name %> ( <%=x.qty_in_cart %> )<span> <b> ₹ <%= (x.offer_price)*(x.qty_in_cart) %> </b></span></li>
+                                   
+                                        <% sum+= (x.offer_price)*(x.qty_in_cart) %>
+                                    <% }) %>
+
+                                    
+                                </ul>
+                                <ul class="checkout__total__all">
+                                    <li>Subtotal <span>₹ <%= sum %></span></li>
+
+                                    <%  let total_discount = 0
+                                    if(coupon){  %>
+                                        <li id="discount">Coupon discount
+                                            <span>₹
+                                                <%= total_discount= Math.floor(sum*coupon.discount/100) %>
+                                            </span>
+                                        </li>
+                                    <%  } %>
+
+                                    <li>Total <span>₹ <%= sum-total_discount %></span></li>
+
+
+                                        <ul>
+
+                                        
+                                            
+                                        </ul>
+                               
+                                </ul>
+                                <!-- <div class="checkout__input__checkbox">
+                                    <label for="acc-or">
+                                        Create an account?
+                                        <input type="checkbox" id="acc-or">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div> -->
+                                <!-- <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua.</p> -->
+                                <div class="checkout__input__checkbox">
+                                    <label for="cod">
+                                      Cash On Delivery
+                                      <input type="radio" id="cod" name="paymentMethod" value="COD">
+                                      <span class="checkmark"></span>
+                                      <small id="paymentOptionError" class="error-message">atleast select a Payment Option</small>
+
+                                    </label>
+                                    <label for="razorpay">
+                                      Razorpay
+                                      <input type="radio" id="razorpay" name="paymentMethod" value="Razorpay">
+                                      <span class="checkmark"></span>
+                                    </label>
+                                    <small id="paymentOptionError" class="error-message">atleast select a Payment Option</small>
+
+                                  </div>
+                                  <button type="submit" class="site-btn">PLACE ORDER</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+<script src="user/js/checkout.js"></script>
+
+
+
+
+<%-include('partials/footer') %>
+

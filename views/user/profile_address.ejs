@@ -1,0 +1,765 @@
+<%-include('partials/header')%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+    .error-message {
+        color: red;
+        display: none;
+    }
+
+    .profile_details {
+
+        font-family: Arial, sans-serif;
+        margin: 20px auto 80px auto;
+        width: 80%;
+        /* max-width: 600px; */
+    }
+
+    .profile_container {
+        background-color: #fff;
+        border-radius: 15px;
+        /* border: 1px solid #555 ; */
+        box-shadow: 1px 1px 20px rgba(102, 102, 102, 0.15);
+        padding: 30px;
+        width: 50vw;
+        /* margin-left: 150px; */
+        margin: 0 auto;
+
+    }
+
+    .profile_container .form-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+
+    .profile_container .form-group {
+        flex: 1;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-weight: bold;
+    }
+
+    #personalInfoForm input, 
+    #addressForm input,textarea,
+    #editAddressForm input,textarea {
+        min-width: 100%;
+        padding: 9px;
+        border: 0px solid #ccc;
+        border-radius: 7px;
+        background-color: #f5f5f5;
+    }
+
+    #passwordForm input{
+        min-width: 100%;
+        padding: 9px;
+        border: 0px solid #ccc;
+        border-radius: 7px;
+        background-color: #f5f5f5;
+    }
+
+
+    .profile_container .button-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .profile_container button {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .profile_container .edit-btn {
+        padding: 8px 20px;
+        background-color: #1d1d1d;
+    }
+
+    .profile_container .cancel-btn {
+        background-color: #888;
+    }
+
+    .save-btn {
+        background-color: #d32f2f;
+    }
+
+    .cancel-btn:hover {
+        background-color: #777;
+    }
+
+    .edit-btn:hover {
+        background-color: #363232;
+    }
+
+    .save-btn:hover {
+        background-color: #b71c1c;
+    }
+
+
+
+    .forgotPassword a {
+        display: flex;
+        justify-content: end;
+        color: #156da8;
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        /* text-decoration: none; */
+    }
+
+    .forgotPassword a:hover {
+        color: #59a4e0;
+
+    }
+
+
+
+
+
+
+
+
+    .access_control {
+        list-style: none;
+
+         /* display: flex; */
+        /*gap: 20px; */
+        text-align: center;
+        margin-bottom: 45px;
+
+    }
+
+    .access_control li {
+
+
+        color: #b7b7b7;
+        font-size: 24px;
+        font-weight: 700;
+        list-style: none;
+        display: inline-block;
+        margin: 0 30px;
+        cursor: pointer;
+    }
+
+    .access_control li.active {
+        color: #111111;
+    }
+
+    /* .content-section {
+        display: none;
+    } */
+
+    .content-section.active {
+        display: flex;
+        /* Show the active section */
+    }
+
+/* ///////////////////////////////////////////////////////// */
+
+
+    .address_container {
+        
+        min-width: 100%;
+        padding: 12px;
+        margin: 15px 0;
+        border: 0px solid #ccc;
+        border-radius: 7px;
+        background-color: #f1f1f1;
+        display: flex;
+        justify-content: space-between;
+    }
+    .address_container p{
+        margin: 0;
+    }
+                        
+    .address-add-box {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: auto;
+                background: rgba(0, 0, 0, 0.5);
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+            .confirmation-content {
+                /* min-width: 670px; */
+                margin-top: 80px;
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            .confirm-btn, .cancel-btn {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                margin: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .confirm-btn {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .cancel-btn {
+                background-color: #f44336;
+                color: white;
+            }
+            .address_form_btn {
+                padding: 12px 20px;
+                border: none;
+                color: #ffffff;
+                border-radius: 8px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                text-align: end;
+            }
+
+</style>
+
+
+    <!-- Breadcrumb Section Begin -->
+
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Profile</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/homepage">Home</a>
+                            <a href="/profile">profile</a>
+                            <span>Address</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRofile Section Begin -->
+    <section class="profile_details">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="access_control">
+                    <li id="profile-session" onclick="window.location.href='/profile'">My Profile</li>
+                    <li id="address-session" class="active" onclick="window.location.href='/profile_address'">Address Book</li>
+                </ul>
+            </div>
+        </div>
+        <!-- address session -->
+        <div id="address-section" class="content-section">
+            <div class="profile_container">
+                <div class="button-container">
+                    <button type="button" class="edit-btn" id="editButton" onclick="add_address()">add address</button>
+                </div>
+                
+
+
+                <!-- Confirmation Dialog -->
+                <div class="address-add-box" id="address_add_box">
+                    <div class="confirmation-content">
+                        <h3 style="padding: 20px;"><b>Add Address</b></h3>
+                        <form id="addressForm" >
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                                    <small id="fullNameError" class="error-message">Full name is required.</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="number" id="phone_number" placeholder="Enter phone number" required>
+                                    <small id="phoneError" class="error-message">10 number is required.</small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="pincode">Pincode</label>
+                                    <input type="number" id="pincode" placeholder="Enter pincode" required>
+                                    <small id="pincodeError" class="error-message">Pincode 6 number is required.</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select  id="state" required style="padding:20px 20px ;">
+                                        <!-- <option value="" disabled selected>Select State</option> -->
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Andhra Pradesh" >Andhra Pradesh</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <!-- Add more states as needed -->
+                                    </select>
+                                    <small id="stateError" class="error-message">State is required.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" placeholder="Enter city" required>
+                                    <small id="cityError" class="error-message">City is required.</small>
+                                </div>
+                            </div>
+                            <!-- <div class="form-row"></div> -->
+                        
+                            <div class="form-group">
+                                <label for="house">House No</label>
+                                <textarea id="house" rows="3" placeholder="Enter house number or name" required></textarea>
+                                <small id="houseError" class="error-message">House number is required.</small>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="roadMap">Road Map</label>
+                                <textarea id="roadMap" rows="3" placeholder="Enter road map or description" required></textarea>
+                                <small id="roadMapError" class="error-message">Road map is required.</small>
+                            </div>
+
+                            <div class="address_form_btn">
+                                <button class="cancel-btn" onclick="close_address()">Cancel</button>
+                                <button type="submit" style="background-color: #4CAF50;">Save Address</button>
+                            </div>
+                            
+                        </form>
+                         
+                    </div>
+                </div>
+                <div class="address-add-box" id="address_edit_box">
+                    <div class="confirmation-content">
+                        <h3 style="padding: 20px;"><b>Edit Address</b></h3>
+                        <form id="editAddressForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName1" placeholder="Enter your full name" required>
+                                    <small id="fullNameError" class="error-message">Full name is required.</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="number" id="phone_number1" placeholder="Enter phone number" required>
+                                    <small id="phoneError" class="error-message">10 number is required.</small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="pincode">Pincode</label>
+                                    <input type="number" id="pincode1" placeholder="Enter pincode" required>
+                                    <small id="pincodeError" class="error-message">Pincode 6 number is required.</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select  id="state1" required style="padding:20px 20px ;">
+                                        <!-- <option value="" disabled selected>Select State</option> -->
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <!-- Add more states as needed -->
+                                    </select>
+                                    <small id="stateError" class="error-message">State is required.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city1" placeholder="Enter city" required>
+                                    <small id="cityError" class="error-message">City is required.</small>
+                                </div>
+                            </div>
+                            <!-- <div class="form-row"></div> -->
+                        
+                            <div class="form-group">
+                                <label for="house">House No</label>
+                                <textarea id="house1" rows="3" placeholder="Enter house number or name" required></textarea>
+                                <small id="houseError" class="error-message">House number is required.</small>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="roadMap">Road Map</label>
+                                <textarea id="roadMap1" rows="3" placeholder="Enter road map or description" required></textarea>
+                                <small id="roadMapError" class="error-message">Road map is required.</small>
+                            </div>
+
+                            <div class="address_form_btn">
+                                <button class="cancel-btn" onclick="close_address()">Cancel</button>
+                                <button type="submit" style="background-color: #4CAF50;">Save Address</button>
+                            </div>
+                            
+                        </form>
+                         
+                    </div>
+                </div>
+                <div id="address-list">
+                    <%addresses.forEach((x)=>{ %>
+                        <div class="address_container">
+                            <div>
+                                <p style="margin: 0;"><%=x.full_name%> ,<%=x.phone_number%> , <%=x.pincode%> , <%=x.state%> , <%=x.city%> , <%=x.house%> , <%=x.road_map%>  </p>
+                                
+                            </div>
+                            <div style="margin-left: 5px; display: flex;  cursor: pointer;">
+                                <div  onclick="edit_address('<%= JSON.stringify(x) %>')">
+                                    <svg width="22px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21.2799 6.40005L11.7399 15.94C10.7899 16.89 7.96987 17.33 7.33987 16.7C6.70987 16.07 7.13987 13.25 8.08987 12.3L17.6399 2.75002C17.8754 2.49308 18.1605 2.28654 18.4781 2.14284C18.7956 1.99914 19.139 1.92124 19.4875 1.9139C19.8359 1.90657 20.1823 1.96991 20.5056 2.10012C20.8289 2.23033 21.1225 2.42473 21.3686 2.67153C21.6147 2.91833 21.8083 3.21243 21.9376 3.53609C22.0669 3.85976 22.1294 4.20626 22.1211 4.55471C22.1128 4.90316 22.0339 5.24635 21.8894 5.5635C21.7448 5.88065 21.5375 6.16524 21.2799 6.40005V6.40005Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                </div>
+                                <div style=" margin-left: 10px;"  onclick="delete_address('<%=x._id%>')">
+                                    <svg width="20px" height="20px" viewBox="0 0 25 25" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="20" />
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke="#f53838" stroke-width="0.9600000000000002">
+                                            <path
+                                                d="M1.5 3.75C1.08579 3.75 0.75 4.08579 0.75 4.5C0.75 4.91421 1.08579 5.25 1.5 5.25V3.75ZM22.5 5.25C22.9142 5.25 23.25 4.91421 23.25 4.5C23.25 4.08579 22.9142 3.75 22.5 3.75V5.25ZM1.5 5.25H22.5V3.75H1.5V5.25Z"
+                                                fill="#f53838" />
+                                            <path
+                                                d="M9.75 1.5V0.75V1.5ZM8.25 3H7.5H8.25ZM7.5 4.5C7.5 4.91421 7.83579 5.25 8.25 5.25C8.66421 5.25 9 4.91421 9 4.5H7.5ZM15 4.5C15 4.91421 15.3358 5.25 15.75 5.25C16.1642 5.25 16.5 4.91421 16.5 4.5H15ZM15.75 3H16.5H15.75ZM14.25 0.75H9.75V2.25H14.25V0.75ZM9.75 0.75C9.15326 0.75 8.58097 0.987053 8.15901 1.40901L9.21967 2.46967C9.36032 2.32902 9.55109 2.25 9.75 2.25V0.75ZM8.15901 1.40901C7.73705 1.83097 7.5 2.40326 7.5 3H9C9 2.80109 9.07902 2.61032 9.21967 2.46967L8.15901 1.40901ZM7.5 3V4.5H9V3H7.5ZM16.5 4.5V3H15V4.5H16.5ZM16.5 3C16.5 2.40326 16.2629 1.83097 15.841 1.40901L14.7803 2.46967C14.921 2.61032 15 2.80109 15 3H16.5ZM15.841 1.40901C15.419 0.987053 14.8467 0.75 14.25 0.75V2.25C14.4489 2.25 14.6397 2.32902 14.7803 2.46967L15.841 1.40901Z"
+                                                fill="#f53838" />
+                                            <path
+                                                d="M9 17.25C9 17.6642 9.33579 18 9.75 18C10.1642 18 10.5 17.6642 10.5 17.25H9ZM10.5 9.75C10.5 9.33579 10.1642 9 9.75 9C9.33579 9 9 9.33579 9 9.75H10.5ZM10.5 17.25V9.75H9V17.25H10.5Z"
+                                                fill="#f53838" />
+                                            <path
+                                                d="M13.5 17.25C13.5 17.6642 13.8358 18 14.25 18C14.6642 18 15 17.6642 15 17.25H13.5ZM15 9.75C15 9.33579 14.6642 9 14.25 9C13.8358 9 13.5 9.33579 13.5 9.75H15ZM15 17.25V9.75H13.5V17.25H15Z"
+                                                fill="#f53838" />
+                                            <path
+                                                d="M18.865 21.124L18.1176 21.0617L18.1176 21.062L18.865 21.124ZM17.37 22.5L17.3701 21.75H17.37V22.5ZM6.631 22.5V21.75H6.63093L6.631 22.5ZM5.136 21.124L5.88343 21.062L5.88341 21.0617L5.136 21.124ZM4.49741 4.43769C4.46299 4.0249 4.10047 3.71818 3.68769 3.75259C3.2749 3.78701 2.96818 4.14953 3.00259 4.56231L4.49741 4.43769ZM20.9974 4.56227C21.0318 4.14949 20.7251 3.78698 20.3123 3.75259C19.8995 3.7182 19.537 4.02495 19.5026 4.43773L20.9974 4.56227ZM18.1176 21.062C18.102 21.2495 18.0165 21.4244 17.878 21.5518L18.8939 22.6555C19.3093 22.2732 19.5658 21.7486 19.6124 21.186L18.1176 21.062ZM17.878 21.5518C17.7396 21.6793 17.5583 21.75 17.3701 21.75L17.3699 23.25C17.9345 23.25 18.4785 23.0379 18.8939 22.6555L17.878 21.5518ZM17.37 21.75H6.631V23.25H17.37V21.75ZM6.63093 21.75C6.44274 21.75 6.26142 21.6793 6.12295 21.5518L5.10713 22.6555C5.52253 23.0379 6.06649 23.25 6.63107 23.25L6.63093 21.75ZM6.12295 21.5518C5.98449 21.4244 5.89899 21.2495 5.88343 21.062L4.38857 21.186C4.43524 21.7486 4.69172 22.2732 5.10713 22.6555L6.12295 21.5518ZM5.88341 21.0617L4.49741 4.43769L3.00259 4.56231L4.38859 21.1863L5.88341 21.0617ZM19.5026 4.43773L18.1176 21.0617L19.6124 21.1863L20.9974 4.56227L19.5026 4.43773Z"
+                                                fill="#f53838" />
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    <%})%>
+                </div>
+                    
+                    
+            </div>
+        </div>
+
+    </section>
+    
+
+    <!-- Profile Section End -->
+    <%-include('partials/footer')%>
+
+
+    <script>
+
+// address session
+
+    //address book
+
+
+        function add_address() {
+            document.getElementById('address_add_box').style.display = 'flex';
+        }
+        
+        function close_address() {
+            document.getElementById('addressForm').reset()
+            document.getElementById('editAddressForm').reset()
+            document.getElementById('address_edit_box').style.display = 'none';
+            document.getElementById('address_add_box').style.display = 'none';
+            window.location.reload()
+        }
+        
+        document.getElementById('addressForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            let is_valid = true;
+
+            // Get form values
+            const fullName = document.getElementById('fullName').value.trim();
+            const phoneNumber = document.getElementById('phone_number').value.trim();
+            const pincode = document.getElementById('pincode').value.trim();
+            const state = document.getElementById('state').value;
+            const city = document.getElementById('city').value.trim();
+            const house = document.getElementById('house').value.trim();
+            const roadMap = document.getElementById('roadMap').value.trim();
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-message').forEach(error => error.style.display = 'none');
+
+            // Validate Full Name
+            if (fullName === '') {
+                document.getElementById('fullNameError').style.display = 'block';
+                is_valid = false;
+            }
+
+            // Validate Phone Number
+            const phonePattern = /^\d{10}$/;
+            if (!phoneNumber.match(phonePattern)) {
+                document.getElementById('phoneError').style.display = 'block';
+                is_valid = false;
+            }
+
+            // Validate Pincode
+            if (pincode === '' || !/^\d{6}$/.test(pincode)) {
+                document.getElementById('pincodeError').style.display = 'block';
+                is_valid = false;
+            }
+
+            // Validate State
+            if (state === '') {
+                document.getElementById('stateError').style.display = 'block';
+                is_valid = false;
+            }
+
+            // Validate City
+            if (city === '') {
+                document.getElementById('cityError').style.display = 'block';
+                is_valid = false;
+            }
+
+            // Validate House
+            if (house === '') {
+                document.getElementById('houseError').style.display = 'block';
+                is_valid = false;
+            }
+
+            // Validate Road Map
+            if (roadMap === '') {
+                document.getElementById('roadMapError').style.display = 'block';
+                is_valid = false;
+            }
+
+            if (is_valid) {
+                // Construct the payload
+                const address_data = {
+                    full_name:fullName,
+                    phone_number:phoneNumber,
+                    pincode,
+                    state,
+                    city,
+                    house,
+                    road_map:roadMap,
+                };
+                // alert('hhoooo')
+                fetch("/add_address", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(address_data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                if (data.success) {
+                    Swal.fire(
+                        'Saved!',
+                        'The address Saved Successfully.',
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+
+                            close_address()
+                        }
+                    });    
+                } else {
+                    Swal.fire(
+                        'Failed!',
+                        'The address adding Failed .',
+                        'Failed'
+                    ).then((result) => {
+                            if (result.isConfirmed) {
+                                // Reload the page if the OK button is clicked
+                                location.reload();
+                            }
+                    });  
+                }
+                })
+                .catch(error => {
+                console.error("Error:", error);
+                });
+            }
+        });
+    
+    // deleting the address
+        function delete_address(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action will delete the address permanently.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Proceed with deletion (e.g., send a request to your server)
+                    fetch(`/delete_address/${id}`, {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                'The address has been deleted.',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Reload the page if the OK button is clicked
+                                    location.reload();
+                                }
+                            });  
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'There was a problem deleting the address.',
+                                'error'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Reload the page if the OK button is clicked
+                                    location.reload();
+                                }
+                            });  
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire('Error!', 'Something went wrong.', 'error');
+                        console.error("Error:", error);
+                    });
+                }
+            });
+        }
+        function edit_address(address) {
+            address = JSON.parse(address)
+            
+            document.getElementById('fullName1').value= address.full_name
+            document.getElementById('phone_number1').value= address.phone_number
+            document.getElementById('pincode1').value= address.pincode
+            document.getElementById('state1').value = `Delhi`
+            document.getElementById('city1').value= address.city
+            document.getElementById('house1').value= address.house
+            document.getElementById('roadMap1').value= address.road_map
+
+            document.getElementById('address_edit_box').style.display = 'flex';
+
+            document.getElementById('editAddressForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                let is_valid = true;
+
+                // Get form values
+                const fullName = document.getElementById('fullName1').value.trim();
+                const phoneNumber = document.getElementById('phone_number1').value.trim();
+                const pincode = document.getElementById('pincode1').value.trim();
+                const state = document.getElementById('state1').value;
+                const city = document.getElementById('city1').value.trim();
+                const house = document.getElementById('house1').value.trim();
+                const roadMap = document.getElementById('roadMap1').value.trim();
+
+                // Clear previous error messages
+                document.querySelectorAll('.error-message').forEach(error => error.style.display = 'none');
+
+                // Validate Full Name
+                if (fullName === '') {
+                    document.getElementById('fullNameError').style.display = 'block';
+                    is_valid = false;
+                }
+
+                // Validate Phone Number
+                const phonePattern = /^\d{10}$/;
+                if (!phoneNumber.match(phonePattern)) {
+                    document.getElementById('phoneError').style.display = 'block';
+                    is_valid = false;
+                }
+
+                // Validate Pincode
+                if (pincode === '' || !/^\d{6}$/.test(pincode)) {
+                    document.getElementById('pincodeError').style.display = 'block';
+                    is_valid = false;
+                }
+
+                // Validate State
+                if (state === '') {
+                    document.getElementById('stateError').style.display = 'block';
+                    is_valid = false;
+                }
+
+                // Validate City
+                if (city === '') {
+                    document.getElementById('cityError').style.display = 'block';
+                    is_valid = false;
+                }
+
+                // Validate House
+                if (house === '') {
+                    document.getElementById('houseError').style.display = 'block';
+                    is_valid = false;
+                }
+
+                // Validate Road Map
+                if (roadMap === '') {
+                    document.getElementById('roadMapError').style.display = 'block';
+                    is_valid = false;
+                }
+
+                if (is_valid) {
+                    // Construct the payload
+                    const address_data = {
+                        id:address._id,
+                        full_name:fullName,
+                        phone_number:phoneNumber,
+                        pincode,
+                        state,
+                        city,
+                        house,
+                        road_map:roadMap,
+                    };
+                    // alert('hhoooo')
+                    fetch("/edit_address", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(address_data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                                    Swal.fire(
+                                        'Edit Saved!',
+                                        'The Edited address Saved Successful.',
+                                        'success'
+                                    ).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Reload the page if the OK button is clicked
+                                            location.reload();
+                                        }
+                                    });  
+                        } else {
+                            Swal.fire(
+                                        'Failed!',
+                                        'The address adding Failed .',
+                                        'Failed'
+                                    ).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Reload the page if the OK button is clicked
+                                            location.reload();
+                                        }
+                                    });  
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+                }
+            });
+        }
+    </script>

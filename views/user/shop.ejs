@@ -1,0 +1,192 @@
+
+    <%-include('partials/header')%>
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/homepage">Home</a>
+                            <span>Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shop side-bar and Product list Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+
+                <!-- sidebar session -->
+                <div class="col-lg-3">
+                    <div class="shop__sidebar">
+                        <div class="shop__sidebar__search">
+                            <!-- <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form> -->
+                        </div>
+                        <div class="shop__sidebar__accordion">
+                            <div class="accordion" id="accordionExample">
+
+                                <!-- filter by Category -->
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories"> 
+                                                <ul class="nice-scroll">
+                                                    <% category.forEach((x)=>{ %>
+                                                        <li><a href="/shop?category=<%= x._id %>"><%=x.category_name %></a></li>
+                                                    <% })%>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- filter by Brand -->
+                                <!-- <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__brand">
+                                                <ul>
+                                                    <li><a href="#">Samsung</a></li>
+                                                    <li><a href="#">apple</a></li>
+                                                    <li><a href="#">Microsoft</a></li>
+                                                    <li><a href="#">Lenova</a></li>
+                                                    <li><a href="#">Realme</a></li>
+                                                    <li><a href="#">Redme</a></li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <!-- filter by price -->
+                                <!-- <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+                                    </div>
+                                    <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__price">
+                                                <ul>
+                                                    <li><a href="#">₹0.00 - ₹500.00</a></li>
+                                                    <li><a href="#">₹500.00 - ₹ 2000.00</a></li>
+                                                    <li><a href="#">₹2000.00 - ₹5000.00</a></li>
+                                                    <li><a href="#">₹5000.00 - ₹10000.00</a></li>
+                                                    <li><a href="#">₹20000.00 - ₹30000.00</a></li>
+                                                    <li><a href="#">₹30000.00 - ₹40000.00</a></li>
+
+                                                    <li><a href="#">₹40000.00+</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRoducts list  -->
+                <div class="col-lg-9">
+                    <div class="shop__product__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__left">
+                                    <p>Showing 1-12 of <%=products.length %> results</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__right">
+                                    <p>Quick Sort:</p>
+                                    <select id="sort-options" onchange="quick_sort()">
+                                        <option value="">Select</option>
+                                        <option value="new-arrivals">New Arrivals</option>
+                                        <option value="old-arrivals">Old Arrivals</option>
+                                        <option value="low-to-high">Low to High</option>
+                                        <option value="high-to-low">High to Low</option>
+                                        <option value="a-to-z">A - Z</option>
+                                        <option value="z-to-a">Z - A</option>
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row shop__product__list" id="product-list">
+
+                        <% if(products.length<=0){ %>
+                            <h1 
+                                style="color: silver; margin: 150px auto;">
+                                <b>Product Is Empty</b>
+                            </h1>
+                        <% } %>
+
+                        <% products.forEach((x) => { %>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    
+                                    <div class="product__item__pic set-bg" onclick="location.href='/product_details?id=<%=x._id%>'" data-setbg="assets/uploads/<%=x.images[0]%>">
+                                        <ul class="product__hover">
+                                            <li><div onclick="add_to_wishlist(event,'<%=x._id%>')">
+                                                <svg  width="23px" height="23px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                            </div></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><%=x.product_name%></h6> 
+                                        <a href="#" class="add-cart" onclick="add_to_cart(event,'<%=x._id%>',qty=1)" data-id="<%=x._id%>">+ Add To Cart</a>
+                                        <div class="rating-container">
+                                            <% for (let i = 1; i <= 5; i++) { %>
+                                              <% if (i <= Math.floor(x.rating)) { %>
+                                                <span class="rating-star filled" data-value="<%= i %>">&#9733;</span>
+                                              <% } else { %>
+                                                <span class="rating-star" data-value="<%= i %>">&#9734;</span>
+                                              <% } %>
+                                            <% } %>
+                                        </div>
+
+                                        <div style="display: flex; ">
+                                            <h5>₹<%=x.offer_price%></h5>
+                                            <h6 style="padding-left: 5px; color: red;"><del> ₹<%=x.price%>/</del></h6>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+    <!-- Footer Section Begin -->
+
+    <%-include('partials/footer')%>
+
+    <!-- Footer Section End -->
+
+</body>
+
+
+<script src="user/js/shop.js" ></script>
+<script src="user/js/add_to_cart.js" ></script>
+<script src="user/js/add_to_wishlist.js"></script>

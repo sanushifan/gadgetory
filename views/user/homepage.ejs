@@ -1,0 +1,108 @@
+ <body>
+    <%-include('partials/header')%>
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="hero__slider owl-carousel">
+            <div class="hero__items set-bg" data-setbg="user/img/hero/hero-1.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>BIGGEST FLASH SALE</h6>
+                                <h2>New - Christmas OFFER 2024</h2>
+                                <p></p>
+                                <!-- <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a> -->
+                                <!-- <div class="hero__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__items set-bg" data-setbg="user/img/hero/hero-3.png">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>Christmas Collection</h6>
+                                <h2 style="color: aliceblue;">Fall - Winter Collections 2024</h2>
+                                <!-- <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering commitment to exceptional quality.</p> -->
+                                <!-- <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a> -->
+                                <!-- <div class="hero__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="filter__controls" style="margin-top: 20px;">
+                        <li class="active" data-filter="*">Best Selling</li>
+                        <!-- <li data-filter=".new-arrivals">New Arrivals</li> -->
+                        <!-- <li data-filter=".hot-sales">Hot Sales</li> -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row product__filter">
+                <% products.forEach((x)=>{ %>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" onclick="location.href='/product_details?id=<%=x._id%>'" data-setbg="assets/uploads/<%=x.images[0]%>">
+                            <!-- <span class="label">New</span> -->
+                            <ul class="product__hover">
+                                <li><div onclick="add_to_wishlist(event,'<%=x._id%>')">
+ 
+                                    <svg  width="23px" height="23px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+
+                                </div></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><%=x.product_name%></h6>
+                            <a href="#"  class="add-cart" onclick="add_to_cart(event,'<%=x._id%>',qty=1)" data-id="<%=x._id%>">+ Add To Cart</a>
+                            <div class="rating-container">
+                                <% for (let i = 1; i <= 5; i++) { %>
+                                  <% if (i <= Math.floor(x.rating)) { %>
+                                    <span class="rating-star filled" data-value="<%= i %>">&#9733;</span>
+                                  <% } else { %>
+                                    <span class="rating-star" data-value="<%= i %>">&#9734;</span>
+                                  <% } %>
+                                <% } %>
+                            </div>
+                            <div style="display: flex; ">
+                                <h5>₹<%=x.offer_price%></h5>
+                                <h6 style="padding-left: 5px; color: red;"><del> ₹<%=x.price%>/</del></h6>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+
+            </div>
+        </div>
+    </section> 
+    <!-- Footer Section Begin -->
+    <%-include('partials/footer')%>
+
+</body>
+<script src="user/js/add_to_cart.js" ></script>
+<script src="user/js/add_to_wishlist.js"></script>

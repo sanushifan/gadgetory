@@ -1,0 +1,145 @@
+<%-include('partials/header')%>
+
+			    
+<div class="app-wrapper">
+            
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">Order Management</h1>
+                </div>
+                <div class="col-auto">
+                    <div class="page-utilities">
+                        <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+                            <div class="col-auto">
+                            
+                        </div><!--//col-->
+                    </div><!--//row-->
+                </div><!--//table-utilities-->
+            </div><!--//col-auto-->
+        </div><!--//row-->
+       
+        
+        <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+            <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Orders</a>
+            <!-- <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Delivered Orders</a> -->
+        </nav>
+        
+        
+        <div class="tab-content" id="orders-table-tab-content">
+            <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+                <div class="app-card app-card-orders-table shadow-sm mb-5">
+                    <div class="app-card-body">
+                        <div class="table-responsive">
+                            <table class="table app-table-hover mb-0 text-left">
+                                <thead>
+                                    <tr>
+                                        <th class="cell">Order id</th>
+                                        <th class="cell">Name</th>
+                                        <th class="cell">Payment</th>
+                                        <th class="cell">Order date</th>
+                                        <th class="cell">Final Price</th>	 
+                                        <th class="cell">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="refresh">
+                                    <% orders.forEach((x)=> {%>
+                                        <tr id="dynamic_tr">
+                                            <td class="cell"><%= x.order_id %></td>
+                                            <td class="cell"><span class="truncate"><%= x.address.full_name %></span></td>
+                                            <td class="cell"><%= x.payment_method %></td>
+                                            <td class="cell">
+                                                <%= new Date(x.order_date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: 'short',
+                                                    year: 'numeric',
+                                                  }) %>
+                                            </td>
+                                            <td class="cell"><span>₹<%= x.final_price %></span></td>
+
+                                            <td class="cell"><span><%= x.status %></span></td>
+                                            <td class="cell" style="padding:8px 0; text-align: end;"><a href="/admin/update_order?id=<%= x._id %>" class="btn btn-sm rounded" style="color: #ffffff; background-color: #333333; min-width: 60px; margin-right: 20px;">View&nbsp;&&nbsp;Update</a></td>
+                                            <!-- <td style="padding:8px 0;"><a href="/admin/user_manage" id="delete_btn" class="btn btn-danger btn-sm mr-4" onclick="block_user('<%= x._id %>')" style="color: #ffffff; background-color: #f54013 ;">Block</a></td> -->
+                                            <!-- <td style="padding:8px 0;"><a href="/admin/user_manage" id="delete_btn" class="btn btn-danger btn-sm"  onclick="delete_user('<%= x._id %>')" style="color: #ffffff; background-color: #f54013 ;">delete</a></td> -->
+
+                                        </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div><!--//table-responsive-->
+                       
+                    </div><!--//app-card-body-->		
+                </div><!--//app-card-->
+
+
+				<!-- app-pagination -->
+				<div class="pagination">
+					<% if (current_page > 1) { %>
+						<a href="/admin/orders?page=<%= current_page - 1 %> & limit=10">Previous</a>
+
+					<% } %>
+					<% for (let i = 1; i <= total_pages; i++) { %>
+						<a href="/admin/orders?page=<%= i %> & limit=10" 
+						   class="<%= current_page === i ? 'active' : '' %>"><%= i %></a>
+					<% } %>
+					<% if (current_page < total_pages) { %>
+						<a href="/admin/orders?page=<%= current_page + 1 %> & limit=10">Next</a>
+					<% } %>
+				</div>
+
+				<!-- app-pagination -->
+
+
+
+
+                
+            </div><!--//tab-pane full data-->
+            
+            <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+                <div class="app-card app-card-orders-table shadow-sm mb-5">
+                    <div class="app-card-body">
+                        <div class="table-responsive">
+                            <table class="table app-table-hover mb-0 text-left">
+                                <thead>
+                                    <tr>
+                                        <th class="cell">User id</th>
+                                        <th class="cell">First Name</th>
+                                        <th class="cell">Last Name</th>
+                                        <th class="cell">Phno Number</th>	 
+                                        <th class="cell">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% orders.forEach((x)=> {%>
+                                        <tr id="dynamic_tr">
+                                            <td class="cell"><%= x._id %></td>
+                                            <td class="cell"><span class="truncate"><%= x.first_name %></span></td>
+                                            <td class="cell"><%= x.last_name %></td>
+                                            <td class="cell"><span><%= x.phno_number %></span></td>
+                                            <td class="cell"><span><%= x.email %></span></td>
+                                            <td style="padding:8px 0; max-width: 60px;"><a href="/admin/update_order?id=<%= x._id %>" class="btn btn-sm mr-4" style="color: #ffffff; background-color: #222222; min-width: 60px;">View & Update</a></td>
+                                            <!-- <td style="padding:8px 0;"><a href="/admin/user_manage" id="delete_btn" class="btn btn-danger btn-sm"  onclick="delete_user('<%= x._id %>')" style="color: #ffffff; background-color: #f54013 ;">delete</a></td> -->
+
+                                        </tr>
+                                    <% }); %>
+
+                                </tbody>
+                            </table>
+                        </div><!--//table-responsive-->
+                       
+                    </div><!--//app-card-body-->		
+                </div><!--//app-card-->
+            </div><!--//tab-pane deleted data-->
+            
+        </div><!--//tab-content-->
+        
+        
+        
+    </div><!--//container-fluid-->
+</div><!--//app-content-->
+
+</div><!--//app-wrapper-->   
+
+
