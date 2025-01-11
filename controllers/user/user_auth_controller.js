@@ -164,10 +164,13 @@ module.exports = {
   },
   new_password:async(req,res)=> {
     try {
-      console.log("pass verifyed");
-      const {password} = req.body
+      console.log("new pass setting");
+
+      let {password} = req.body
+      hashed_password = await bcrypt.hash(password, 10);n 
+
       if (req.session.otp_verify) {
-        await User.updateOne({email:req.session.email},{$set:{password:password}})
+        await User.updateOne({email:req.session.email},{$set:{password:hashed_password}})
         delete req.session.email;
         delete req.session.otp_verify;
         console.log("pass verifyed");
