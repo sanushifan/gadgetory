@@ -1,20 +1,21 @@
-
 <head>
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="user/css/login_style.css">
-  <link rel="stylesheet" href="user/css/otp_style.css" >
+  <link rel="stylesheet" href="user/css/otp_style.css">
 
   <script src="user/js/otp_script.js" defer></script>
 
-      <!-- iziToast alert -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js" defer></script>
-      
+  <!-- iziToast alert -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js" defer></script>
 
- 
+  <title>Gadgetory | OTP Verification</title>
+  <link rel="icon" href="assets/icons/gadgetory-favicon.png" type="image/x-icon">
+
+
 </head>
 
-<body >
+<body>
   <section class="bg-light p-3 p-md-4 p-xl-5">
     <div class="container">
       <div class="row justify-content-center">
@@ -29,40 +30,44 @@
 
                 <div class="col-12 col-lg-11 col-xl-10 pt-5">
 
-                  
+
                   <div class="card-body  p-md-4 p-xl-5">
-                    
+
 
                     <div class="container1">
-                        <h4>Enter OTP Code</h4>
+                      <h4>Enter OTP Code</h4>
 
-                        <form action="/otp_verification" method="post" id="otpForm" onsubmit="handleSubmit(event)">
-                            <div class="otp-inputs input-field">
-                                <input type="text" class="otp-input" maxlength="1" id="otp1" name="otp1" oninput="moveFocus(event, 'otp2')" required>
-                                <input type="text" class="otp-input" maxlength="1" id="otp2" name="otp2" oninput="moveFocus(event, 'otp3')" required>
-                                <input type="text" class="otp-input" maxlength="1" id="otp3" name="otp3" oninput="moveFocus(event, 'otp4')" required>
-                                <input type="text" class="otp-input" maxlength="1" id="otp4" name="otp4" oninput="validateOTP()" required>
-                            </div>
-                            
-                            <button type="submit" class="otp-button" id="submitButton" >Verify OTP</button>
-                            <p id="new"></p>
-                          </form>
+                      <form action="/otp_verification" method="post" id="otpForm" onsubmit="handleSubmit(event)">
+                        <div class="otp-inputs input-field">
+                          <input type="text" class="otp-input" maxlength="1" id="otp1" name="otp1"
+                            oninput="moveFocus(event, 'otp2')" required>
+                          <input type="text" class="otp-input" maxlength="1" id="otp2" name="otp2"
+                            oninput="moveFocus(event, 'otp3')" required>
+                          <input type="text" class="otp-input" maxlength="1" id="otp3" name="otp3"
+                            oninput="moveFocus(event, 'otp4')" required>
+                          <input type="text" class="otp-input" maxlength="1" id="otp4" name="otp4"
+                            oninput="validateOTP()" required>
+                        </div>
 
-                      </div>
+                        <button type="submit" class="otp-button" id="submitButton">Verify OTP</button>
+                        <p id="new"></p>
+                      </form>
+
+                    </div>
                     <div class="row pt-2">
                       <div style="text-align: center;">
 
-                        
-                      <p class="create-account">
-                          Not received your code? 
-                          <a href="/send_otp" id="resendOtpLink" >Resend OTP</a>
+
+                        <p class="create-account">
+                          Not received your code?
+                          <a href="/send_otp" id="resendOtpLink">Resend OTP</a>
                           <span id="otp_timer">00:00</span>
-                      </p>                        
-                        
-                      <p class="create-account mt-2">Back to Login ? <a href="/login"> Log in Page</a> </p>
+                        </p>
+
+                        <p class="create-account mt-2">Back to Login ? <a href="/login"> Log in Page</a> </p>
                       </div>
                     </div>
- 
+
                   </div>
                 </div>
               </div>
