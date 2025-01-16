@@ -1047,6 +1047,18 @@ module.exports = {
        });
     }
   },
+  fetch_wishlist:async (req,res)=>{
+    try {
+      console.log('fetching wishlist data');
+      
+      let wishlist = await Wishlist.findOne({user_id:req.session.user_token}).populate('products.product_id'); 
+      console.log(wishlist);
+
+      res.json(wishlist);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching wishlist", error });
+    }
+  },
   add_to_wishlist:async (req,res)=>{
     try {
       let product_id = req.body.product_id;

@@ -721,6 +721,24 @@ module.exports = {
         console.log(error);
         return res.status(500).json({ message: 'something went wrong' })
     }
-  }
+  },
+  show_sales_report: async (req, res) => {
+
+    try {
+        const orders = await Order.find({status:'Delivered'})
+                                  .populate("order_items.product_id")
+                                  .sort({order_date:-1})
+                                  
+        res.render("admin/sales_report", {
+          active_page: "sales_report",
+          orders,
+        });
+      } catch (err) {
+        console.error("Error rendering sales report:", err);
+        res
+          .status(httpStatusCode.INTERNAL_SERVER_ERROR)
+          .json({ status: "Failed", message: '"sales report page Failed"' });
+      }
+  },
 
 };

@@ -36,6 +36,7 @@ function updateProductList(products) {;
 
   products.forEach((product) => {
     // console.log(product.images[0]);
+    
     let rated_star = `<span class="rating-star filled" >&#9733;</span>`
     let unrated_star = `<span class="rating-star" >&#9734;</span>`
     let ratings =''
@@ -47,7 +48,7 @@ function updateProductList(products) {;
         }   
       }
 
-    const productItem = `
+    const productItem = ` 
                               <div class="col-lg-4 col-md-6 col-sm-6">
                                   <div class="product__item">
                                     
@@ -64,11 +65,9 @@ function updateProductList(products) {;
                                         <h6>${product.product_name}</h6> 
                                         <a href="#" class="add-cart" onclick="add_to_cart(event,'${product._id}',qty=1)" data-id="${product._id}">+ Add To Cart</a> 
                                                    
-                                        
                                         <div class="rating-container">
                                             ${ratings}
                                         </div>
-
 
                                         <div style="display: flex; ">
                                             <h5>₹${product.offer_price}</h5>

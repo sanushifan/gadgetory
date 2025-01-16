@@ -62,6 +62,8 @@ router.get('/edit_category', admin_token_check, admin_controller.show_edit_categ
 router.post('/edit_category', admin_token_check, admin_controller.edit_category);
 router.post('/delete_category', admin_token_check, admin_controller.delete_category);
 
+// Sales report
+router.get('/sales_report', admin_token_check, admin_controller.show_sales_report);
 
 
 // Fetching Data

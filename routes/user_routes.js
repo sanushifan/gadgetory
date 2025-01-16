@@ -91,6 +91,9 @@ router.get('/invoice',user_token_check, user_controller.generate_invoice);
 // User Wishlist Details
 router.get('/wishlist',user_token_check, user_controller.show_wishlist);
 router.post('/add_to_wishlist',user_token_check, user_controller.add_to_wishlist);
+router.get('/fetch_wishlist',user_token_check, user_controller.fetch_wishlist);
+
+
 router.post('/remove_from_wishlist',user_token_check, user_controller.remove_from_wishlist);
 
 // User Wishlist Details

@@ -1,0 +1,28 @@
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.sales_report_btn{
+    /* width: 116px; */
+    height: 40px;
+    padding: 8px; 
+    background-color: #fff; 
+    border-radius: 0.2rem;
+    border: 1px solid #ddd;
+    text-align: center;
+    align-content: center;
+    /* box-shadow:0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);  */
+    cursor: pointer;
+}
+.sales_report_btn:hover{
+    background-color: #fafafa;
+}
