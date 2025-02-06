@@ -8,6 +8,7 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     const phno_number = document.getElementById('phno_number').value
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
+    const referral_code = document.getElementById('referral_code').value
 
     document.getElementById('used_email').style.display = 'none';
 
@@ -71,6 +72,15 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
                 is_valid=false
             } else {
                 passwordError.style.display = 'none';
+            }
+
+            // Last Name Validation
+            const referralCodeError = document.getElementById('referralCodeError');
+            if (!last_name.length === 8 ) {
+                referralCodeError.style.display = 'block';
+                is_valid=false
+            } else {
+                referralCodeError.style.display = 'none';
             }
 
             if(data.success && is_valid == true){

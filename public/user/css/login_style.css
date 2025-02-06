@@ -1,6 +1,7 @@
 body{
   max-height: 600px;
 }
+
 .divider {
   display: flex;
   align-items: center;
@@ -34,6 +35,7 @@ body{
   margin-bottom: 10px;
 }
 
+
 .icon {
   width: 45px;
   height: 45px;
@@ -52,3 +54,8 @@ body{
   font-weight: bold;
 }
 
+.error-message {
+  color: red;
+  font-size: 0.830rem;
+  display: none;
+}

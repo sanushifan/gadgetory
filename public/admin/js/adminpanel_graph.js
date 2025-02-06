@@ -26,7 +26,7 @@ function configureCategoryChart(topSellingCategorys) {
     }
 
     const labels = []
-    const data = [10,2,0,0,0,5,0,0]
+    const data = [10,2,15,0,0,0,0,0]
     
     topSellingCategorys.forEach((category) => {
         labels.push(category.category_name)

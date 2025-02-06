@@ -12,7 +12,7 @@ module.exports = {
   logout: (req, res) => {
     try {
       req.session.destroy();
-      res.redirect("admin/login");
+      res.redirect("/admin/login");
     } catch (err) {
       console.error("Error in Logout:", err);
       return res
