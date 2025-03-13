@@ -125,36 +125,38 @@ module.exports = {
   add_product: async (req, res) => {
     try {
       if (!req.files) {
-        console.log("not getting");
+        console.log("image files not getting");
+        return res
+          .status(httpStatusCode.NOT_FOUND)
+          .json({ status: "Failed", message: "Product images uploading Failed" });
+      }else{
+        const category_id = req.body.category.split(",");
+        console.log(category_id);
+        
+        const image_file_names = req.files.map((file) => file.filename);
+        
+        const new_product = new Product({
+          product_name: req.body.product_name,
+          brand: req.body.brand,
+          size: req.body.size,
+          color: req.body.color,
+          category: category_id,
+          quantity: req.body.quantity,
+          material: req.body.material,
+          price: req.body.price,
+          offer_price: req.body.offer_price,
+          description: req.body.description,
+          images: image_file_names,
+        });
+  
+        await new_product.save();
+  
         return res
           .status(httpStatusCode.OK)
-          .json({ status: false, message: "Product image uploading Failed" });
+          .json({ status: "success", message: "Product image uploading success" });
       }
  
-      const category_id = req.body.category.split(",");
-      console.log(category_id);
       
-      const image_file_names = req.files.map((file) => file.filename);
-      
-      const new_product = new Product({
-        product_name: req.body.product_name,
-        brand: req.body.brand,
-        size: req.body.size,
-        color: req.body.color,
-        category: category_id,
-        quantity: req.body.quantity,
-        material: req.body.material,
-        price: req.body.price,
-        offer_price: req.body.offer_price,
-        description: req.body.description,
-        images: image_file_names,
-      });
-
-      await new_product.save();
-
-      return res
-        .status(httpStatusCode.OK)
-        .json({ status: "success", message: "Product image uploading success" });
     } catch (err) {
       console.error("Error saving product:", err);
       return res

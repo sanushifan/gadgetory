@@ -6,7 +6,7 @@
 
             selectedExistingCategories();
 
-            fetch_category()
+            // fetch_category() 
         };
 
             // function fetch_category() {
@@ -358,7 +358,7 @@
         const categoryList = document.getElementById('category-list');
         const selectedCategoriesContainer = document.getElementById('selected-categories');
         const selectedCategoriesInput = document.getElementById('selectedCategoriesInput');
-        const searchBox = document.getElementById('search-box');
+        const search_box = document.getElementById('search-box');
 
         let selectedCategories = [];
         let selectedCategoriesId = [];
@@ -463,7 +463,7 @@
 
         // Function to filter categories based on search input
         function filterCategories() {
-            const searchText = searchBox.value.toLowerCase();
+            const searchText = search_box.value.toLowerCase();
             const categoryItems = document.querySelectorAll('.category-item');
 
             categoryItems.forEach(item => {

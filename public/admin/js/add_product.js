@@ -1,10 +1,4 @@
-        
-        // Get references to the DOM elements
-        // const showNotificationBtn = document.getElementById('showNotificationBtn');
-        // const closeBtn = document.getElementById('closeBtn');
-        // const add_product_btn = document.getElementById('add_button')
-        // const product_form = document.getElementById('productForm')
-        // const imageInput = document.getElementById('images');
+
 
         const imageInput = document.getElementById('imageInput');
         const imagePreview = document.getElementById('imagePreview');
@@ -79,7 +73,8 @@
         document.getElementById('productForm').addEventListener('submit', async function(event) {
             event.preventDefault();
             let isValid = true;
-        
+            console.log('insode form validation');
+            
             const product_name = document.getElementById('productName').value.trim();
             const brand = document.getElementById('brand').value.trim();
             const size = document.getElementById('size').value.trim();
@@ -172,12 +167,15 @@
         
                 try {
                     // Send the FormData via a POST request
+
                     const response = await fetch('/admin/add_product', {
                         method: 'POST',
                         body: formData,  // The FormData object is automatically processed by fetch
                     });
         
                     const result = await response.json();
+                    console.log('heloo');
+                    
                     if (result.status === 'success') {
                         Swal.fire(
                             `success`,
@@ -188,7 +186,7 @@
                         document.getElementById('productForm').reset();  // Reset the form
 
                         imagePreview.innerHTML = '';  // Clear the image preview
-                    } else {
+                    } else if(result.status === 'Failed') {
                         Swal.fire(
                             `Failed`,
                             `Product added Failed ${result.message}.`,
@@ -220,7 +218,7 @@
         const categoryList = document.getElementById('category-list');
         const selectedCategoriesContainer = document.getElementById('selected-categories');
         const selectedCategoriesInput = document.getElementById('selectedCategoriesInput');
-        const searchBox = document.getElementById('search-box');
+        const search_box = document.getElementById('search-box');
 
         let selectedCategories = [];
         let selectedCategoriesId = [];
@@ -279,7 +277,7 @@
 
         // Function to filter categories based on search input
         function filterCategories() {
-            const searchText = searchBox.value.toLowerCase();
+            const searchText = search_box.value.toLowerCase();
             const categoryItems = document.querySelectorAll('.category-item');
 
             categoryItems.forEach(item => {

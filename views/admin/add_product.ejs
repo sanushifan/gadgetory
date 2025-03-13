@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 
     <!-- Include Cropper.js JS -->
+    <script src="admin/js/add_product.js" defer></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+
 
 
 <body>
@@ -20,7 +24,7 @@
             <div class="container-xl">
 
                 <div class="form-container">
-                    <form id="productForm" action="/admin/add_product" method="post">
+                    <form id="productForm">
                         <div class="form-group">
                             <label for="productName">Product Name</label>
                             <input type="text" id="productName" name="product_name" required>
