@@ -48,34 +48,50 @@
 
 </head>
 <style>
-
+    .nav-session{
+        padding: 25px 0 0 0;
+        
+    }
     .search-bar {
         display: flex;
-        justify-content: space-around;
-        min-width: 70%;
-        padding: 3px;
+        justify-content: space-evenly;
+        min-width: 60%;
+        padding: 0 4px;
         margin-right: 15px;
         border: 0px solid #ccc;
         border-radius: 7px;
-        background-color: #f5f5f5;
+        background-color: #f2f2f2;
     }
 
     .search-bar input {
         min-width: 70%;
         border: 0px solid #ccc;
         border-radius: 7px;
-        background-color: #f5f5f5;
+        background-color: #f2f2f2;
+
     }
     .search-bar form{
         padding: 0;
         margin: 0;
     }
+    .search-bar button{
+        
+	    padding: 5px 0;
+        border: 0px;
+        
+    }
     .nav-icons{
+        display:flex ;
 	    padding: 5px 0;
         border: 0px;
         background: none;
     }
     
+    .header__logo {
+        font-size:  1.5rem;
+        font-weight: bold;
+        width: fit-content;
+    }
 </style>
 
 <div id="search-results"></div>
@@ -91,24 +107,17 @@
     <div class="offcanvas__option">
         <div class="offcanvas__links">
             <a href="#">Sign in</a>
-            <a href="#">FAQs</a>
-        </div>
-        <div class="offcanvas__top__hover">
-            <span>Usd <i class="arrow_carrot-down"></i></span>
-            <ul>
-                <li>USD</li>
-                <li>EUR</li>
-                <li>USD</li>
-            </ul>
         </div>
     </div>
     <div class="offcanvas__nav__option">
-        <a href="#" class="search-switch"><img src="img/icon/search.png" alt="">
-            
-        </a>
+        <form onsubmit="performSearch(event)" class="search-bar">
+            <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
+            <button type="submit">
+                <svg width="23px" height="23px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>                    
+            </button>
+        </form>
         <a href="#"><img src="img/icon/heart.png" alt=""></a>
-        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-        <div class="price">$0.00</div>
+        <a href="#"><img src="img/icon/cart.png" alt=""></a>
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__text">
@@ -148,13 +157,13 @@
         </div>
     </div>
     <!-- nav Barr -->
-    <div class="container">
+    <div class="container nav-session">
         <!-- First row Header BAR -->
         <div class="row">
-            <div class="col-lg-2 col-md-2">
+            <div class="col-lg-2 col-md-3">
                 <div class="header__logo">
-                    <a href="/homepage">
-                        <h3><b>Gadgetory</b></h3>
+                    <a href="/homepage" class="text-dark">
+                        Gadgetory 
                     </a>
                 </div>
             </div>
@@ -164,7 +173,7 @@
                         <li class="<%= active_page === 'home'? 'active':'' %>"><a href="/homepage">Home</a></li>
                         <li class="<%= active_page === 'shop'? 'active':'' %>"><a href="/shop">Shop</a></li>
                         <li class="<%= active_page === 'pages'? 'active':'' %>"><a href="#">Pages</a>
-                            <ul class="dropdown">
+                            <ul class="d-block dropdown">
                                 <li><a href="/orders">Orders</a></li>
                                 <li><a href="/shopping_cart">Shopping Cart</a></li>
                                 <li><a href="/wishlist">Wishlist</a></li>
@@ -175,7 +184,7 @@
                 </nav>
             </div>
 
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-6 col-md-5  align-items-center">
                 <div class="header__nav__option " >
 
                     <!-- searching bar -->
@@ -183,7 +192,7 @@
                     
                     <form onsubmit="performSearch(event)" class="search-bar">
                         <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
-                        <button type="submit" class="nav-icons">
+                        <button type="submit">
                             <svg width="23px" height="23px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>                    
                         </button>
 

@@ -1,95 +1,85 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="user/css/login_style.css">
-  
-  <!-- sweet alert  -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="user/css/login_style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
-  <!-- iziToast alert -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js" defer></script>
-      
-  <!-- Main js -->
-  <script src="user/js/login.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js" defer></script>
+         
+    <script src="user/js/login.js" defer></script>
 
-  <title>Gadgetory | Log in</title>
-  <link rel="icon" href="assets/icons/gadgetory-favicon.png" type="image/x-icon">
-
-
+    <title>Gadgetory | Sign Un</title>
+    <link rel="icon" href="assets/icons/gadgetory-favicon.png" type="image/x-icon">
 </head>
 <body>
-  <section class="bg-light p-3 p-md-4 p-xl-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-10 col-xxl-9">
-          <div class="card border-light-subtle shadow-sm">
-            <div class="row g-0">
+    <section class="bg-light min-vh-100 d-flex align-items-center py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="card border-0 shadow-lg overflow-hidden">
+                        <div class="row g-0">
 
-              <!-- <div class="col-12 col-md-6">
-                <img class="login-image rounded-start " width="85%"
-                  src="assets/backgroud/login_bg.png" alt="Welcome back you've been missed!">
-              </div> -->
-              <div class="login-image object-fit-cover rounded-start col-12 col-md-6" style=" background: url('assets/backgroud/login_bg.png') no-repeat center;  background-size: cover;">
-              </div>
-              
-              <div class="col-12 col-md-6 d-flex justify-content-center">
+                            <div class="login_bg_img col-12 col-md-6 d-none d-md-block login-image-container rounded-start ">
+                                </div>
+                            
+                            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center p-4 p-lg-5">
+                                <div class="w-100">
+                                    
+                                    <h1 class="text-center mb-4">Log In</h1>
+                                    
+                                    <form action="/login" method="post" id="loginForm" onsubmit="submit_form(event)">
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                                                    <label for="email">Email address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                                    <label for="password">Password</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end">
+                                                <a href="/forgot_password" class="text-decoration-none text-muted small">Forgot password?</a>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-grid pt-2">
+                                                    <button class="btn btn-dark btn-lg login-button" type="submit" aria-label="Log in">Log in now</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
 
-                <div class="col-12 col-lg-11 col-xl-10 pt-5">
+                                    <hr class="my-4">
 
-                  <h2 style="margin-left: 1.5rem;">Log In</h2>
-                  <div class="card-body   p-xl-4">
+                                    <div class="text-center mb-3">
+                                        <p class="text-muted small mb-3">Or continue with</p>
+                                        <div class="d-flex justify-content-center social-login-buttons">
+                                            <a href="/auth/google" class="btn btn-outline-secondary social-icon-btn d-flex align-items-center justify-content-center" aria-label="Sign in with Google">
+                                                <img src="assets/icons/google_logo.png" alt="Google Logo" class="social-icon">
+                                            </a>
+                                            </div>
+                                    </div>
 
-                    <form action="/login" method="post" id="loginForm" onsubmit="submit_form(event)">
-                      <div class="row overflow-hidden">
-                        <div class="col-12 mb-2">
-                          <div class="form-floating ">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
-                            <label for="email" class="form-label">Email</label>
-                          </div>
+                                    <p class="text-center mt-4 mb-0 text-muted">
+                                        Don't have an account? <a href="/signup" class="text-decoration-none fw-bold">Sign&nbsp;up</a>
+                                    </p>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 mt-2">
-                          <div class="form-floating">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                            <label for="password" class="form-label">Password</label>
-                          </div>
-                        </div>
-                        <div class="col-12 mt-2 mb-2 text-end">
-                          <a href="/forgot_password" class="text-decoration-none">Forgot password</a>
-                        </div>
-                        <div class="col-12">
-                          <div class="d-grid">
-                            <button class="btn btn-dark btn-lg" type="submit" aria-label="Log in">Log in now</button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-
-                    <div class="row">
-                      <div class="social-icons">
-
-                        <a href="/auth/google"><img src="assets/icons/google_logo.png" alt="Google" class="icon"></a>
-                        <!-- <a href="/auth/facebook"><img src="assets/icons/facebook_logo.png" alt="Facebook" class="icon"></a> -->
-                      
-                      </div>
-                      <div style="text-align: center;">
-                        <p class="create-account ">Create account ? <a href="/signup">Sign up</a></p>
-                      </div>
                     </div>
-
-
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-
- 
+    </section>
 </body>
-
 </html>

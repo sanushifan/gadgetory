@@ -1,106 +1,116 @@
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="user/css/login_style.css">
+    <link rel="stylesheet" href="user/css/signup.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js" defer></script>
+         
     <script src="user/js/signup.js" defer></script>
+
+    <title>Gadgetory | Log in</title>
+    <link rel="icon" href="assets/icons/gadgetory-favicon.png" type="image/x-icon">
 </head>
-
-
 <body>
-  <section class="bg-light p-3 p-md-4 p-xl-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-10 col-xxl-9">
-          <div class="card border-light-subtle shadow-sm">
-            <div class="row g-0">
-              <div class="col-12 col-md-6">
-                <img class="img-fluid rounded-start w-100 h-100 object-fit-cover" loading="lazy"
-                  src="assets/backgroud/login_bg.png" alt="Welcome back you've been missed!">
-              </div>
-              <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <div class="col-12 col-lg-11 col-xl-10">
+    <section class="bg-light min-vh-100 d-flex align-items-center py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-10">
+                    <div class="card border-0 shadow-lg overflow-hidden">
+                        <div class="row g-0">
 
+                            <div class="col-12 col-md-7 d-none d-md-block login_bg_img login-image-container rounded-start">
+                                </div>
+                            
+                            <div class="col-12 col-md-5 d-flex align-items-center justify-content-center pt-4 p-lg-5">
+                                <div class="w-100">
 
-                  <h2 class="mt-5" style="margin-left: 1rem; ">Sign Up</h2>
-                  <div class="card-body  ">
+                                    <h1 class="text-center mb-4 fs-2 fw-bold">Sign Up</h1>
+                                    
+                                    <form action="/signup" method="post" id="signupForm">
+                                        <div class="row g-3"> 
+                                            
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" >
+                                                    <label class="form-label" for="first_name">First Name</label>
+                                                    <div id="firstNameError" class="validation-error">First name should only contain letters.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required>
+                                                    <label class="form-label" for="last_name">Last Name</label>
+                                                    <div id="lastNameError" class="validation-error">Last name should only contain letters.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="tel" class="form-control" name="phno_number" id="phno_number" placeholder="xxxxxxxxx" required>
+                                                    <label class="form-label" for="phno_number">Mobile Number</label>
+                                                    <div id="phoneError" class="validation-error">Please enter a 10-digit phone number.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                                                    <label class="form-label" for="email">Email address</label>
+                                                    <div id="emailError" class="validation-error">Please enter a valid email address.</div>
+                                                    <div id="used_email" class="validation-error">Email is already Used</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                                    <label class="form-label" for="password">Password</label>
+                                                    <div id="passwordError" class="validation-error">Password must be at least 8 characters long and include a mix of letters, numbers, and special characters.</div>
+                                                </div>
+                                            </div>
 
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control" name="referral_code" id="referral_code" placeholder="referral code" >
+                                                    <label class="form-label" for="referral_code">Referral Code (Optional)</label>
+                                                    <div id="referralCodeError" class="validation-error">Referral Code is not Valid.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12 mt-4">
+                                                <div class="d-grid">
+                                                    <button class="btn btn-dark btn-lg login-button" type="submit">Sign Up</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
 
-                    <form action="/signup" method="post" id="signupForm" >
-                      <div class="row gy-1 overflow-hidden">
-                        
-                        <div class="col-12">
-                          <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" required>
-                            <label class="form-label" for="first_name">First Name</label>
-                            <div id="firstNameError" class="error-message">First name should only contain letters.</div>
-                          </div>
-                        </div>
-                    
-                        <div class="col-12">
-                          <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required>
-                            <label class="form-label" for="last_name">Last Name</label>
-                            <div id="lastNameError" class="error-message">Last name should only contain letters.</div>
-                          </div>
-                        </div>
-                    
-                        <div class="col-12">
-                          <div class="form-floating mb-2">
-                            <input type="tel" class="form-control" name="phno_number" id="phno_number" placeholder="xxxxxxxxx" required>
-                            <label class="form-label" for="phno_number">Mobile Number</label>
-                            <div id="phoneError" class="error-message">Please enter a 10-digit phone number.</div>
-                          </div>
-                        </div>
-                    
-                        <div class="col-12">
-                          <div class="form-floating mb-2">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
-                            <label class="form-label" for="email">Email</label>
-                            <div id="emailError" class="error-message">Please enter a valid email address.</div>
-                            <div id="used_email" class="error-message">Email is already Used</div>
-                          </div>
-                        </div>
-                    
-                        <div class="col-12">
-                          <div class="form-floating mb-2">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                            <label class="form-label" for="password">Password</label>
-                            <div id="passwordError" class="error-message">Password must be at least 8 characters long and include a mix of letters, numbers, and special characters.</div>
-                          </div>
-                        </div>
+                                    <hr class="my-4">
 
-                        <div class="col-12">
-                          <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="referral_code" id="referral_code" placeholder="referral code">
-                            <label class="form-label" for="referral_code">Referral Code (Optional)</label>
-                            <div id="referralCodeError" class="error-message">Referral Code is not Valid.</div>
-                          </div>
-                        </div>
-                    
-                        <div class="col-12">
-                          <div class="d-grid">
-                            <button class="btn btn-dark btn-lg" type="submit">Sign Up</button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                    <div class="row">
-                        <div class="social-icons ">
-                          <a href="/auth/google"><img src="assets/icons/google_logo.png" alt="Google" class="icon"></a>
-                        </div>
-                        <div style="text-align: center;">
-                          <p class="create-account ">Already have account ? <a href="/login">Log in</a></p>
-                        </div>
-                      </div>
+                                    <div class="text-center mb-3">
+                                        <p class="text-muted small mb-3">Or sign up with</p>
+                                        <div class="d-flex justify-content-center social-login-buttons">
+                                            <a href="/auth/google" class="btn btn-outline-secondary social-icon-btn d-flex align-items-center justify-content-center" aria-label="Sign up with Google">
+                                                <img src="assets/icons/google_logo.png" alt="Google Logo" class="social-icon">
+                                            </a>
+                                        </div>
+                                    </div>
 
-                  </div>
+                                    <p class="text-center mt-4 mb-0 text-muted">
+                                        Already have an account? <a href="/login" class="text-decoration-none fw-bold text-dark">Log in</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </body>
-

@@ -79,7 +79,7 @@ module.exports = {
       const { email, password } = req.body;
       console.log(email, password);
       const user = await User.findOne({ email , is_blocked:false});
-   
+
       if (user && (await bcrypt.compare(password, user.password))) {
         req.session.user_token = user._id
         console.log("logged",req.session.user_token);
@@ -90,10 +90,13 @@ module.exports = {
           redirect_url: '/homepage' 
         });
       } else {
+        console.log("invalid username or password");
+        
         return res.status(httpStatusCode.CONFLICT).json({
           success: false,
           message:"Invalid email or password"
         });
+
       }
     } catch (error) {
       res.status(httpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);

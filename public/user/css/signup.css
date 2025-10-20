@@ -1,0 +1,87 @@
+
+/* Card Styling */
+.card {
+    border-radius: 1.25rem; /* Softer rounded corners */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important; /* Stronger, professional shadow */
+}
+
+/* Image Column Styling (Applies to both login and signup pages) */
+.login-image-container {
+    background-image: url('assets/backgroud/login_bg.png'); /* Assumes this path is correct relative to the HTML file */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* Ensures the image always covers the container */
+    min-height: 500px; 
+    position: relative;
+}
+.login_bg_img{
+  background-image: url('../../assets/backgroud/login_bg.png');
+}
+
+/* Form Elements */
+.form-floating .form-control {
+    border-radius: 0.75rem;
+    height: 3.8rem; /* Taller inputs for a cleaner look */
+}
+.form-floating > label {
+    padding: 1rem 0.75rem;
+}
+
+/* Validation Error Messages */
+.validation-error , .error-messages {
+    color: #dc3545; 
+    font-size: 0.8rem;
+    padding-top: 0.2rem;
+    display: none;
+
+}
+
+.login-button {
+    background-color: #000;
+    border-color: #000;
+    transition: background-color 0.3s ease;
+    letter-spacing: 0.5px;
+    border-radius: 0.75rem; 
+}
+.login-button:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+/* Social Login Styling */
+.social-login-buttons {
+    gap: 15px; /* Spacing between social buttons */
+}
+
+.social-icon-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%; /* Circular button */
+    border: 1px solid #ced4da;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.social-icon-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #adb5bd;
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 767.98px) {
+    /* Hiding the image is handled by d-none d-md-block in HTML, but this ensures it */
+    .login-image-container {
+        display: none !important; 
+    }
+    /* Increase padding on the form side for better phone layout */
+    .card > .row > .col-12 {
+        padding: 2rem !important;
+    }
+}
